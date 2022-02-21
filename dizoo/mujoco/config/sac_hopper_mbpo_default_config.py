@@ -77,6 +77,7 @@ main_config = dict(
             deepcopy=False,
             enable_track_used_data=False,
             set_buffer_size=set_buffer_size,
+            periodic_thruput_seconds=60,
         ),
         env_model=dict(
             type='mbpo',
@@ -117,7 +118,7 @@ create_config = dict(
         type='sac',
         import_names=['ding.policy.sac'],
     ),
-    replay_buffer=dict(type='naive', ),
+    replay_buffer=dict(type='naive', periodic_thruput_seconds=60),
 )
 create_config = EasyDict(create_config)
 
