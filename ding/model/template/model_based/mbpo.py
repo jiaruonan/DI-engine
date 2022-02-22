@@ -384,11 +384,24 @@ class EnsembleDynamicsModel(nn.Module):
     def _save_states(self, ):
         self._states = copy.deepcopy(self.state_dict())
 
-    def _save_state(self, id):
+    def _save_state(self, id):  # code refactor
         state_dict = self.state_dict()
-        for k, v in state_dict.items():
-            if 'weight' in k or 'bias' in k:
-                self._states[k].data[id] = copy.deepcopy(v.data[id])
+        # for k, v in state_dict.items():
+        #     if 'weight' in k or 'bias' in k:
+        #         self._states[k].data[id] = copy.deepcopy(v.data[id])
+        state_dict1 = dict(list(state_dict.items())[:13])
+        state_dict2 = dict(list(state_dict.items())[13:])
+
+        if id < 3:
+            for k, v in state_dict1.items():  # ensemble1: top 5nn
+                if 'weight' in k or 'bias' in k:
+                    self._states[k].data[id] = copy.deepcopy(v.data[id])
+        else:
+            id = id - 3
+            for k, v in state_dict2.items():  # ensemble2: end 5nn
+                if 'weight' in k or 'bias' in k:
+                    self._states[k].data[id] = copy.deepcopy(v.data[id])
+
 
     def _load_states(self):
         self.load_state_dict(self._states)

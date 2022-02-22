@@ -26,6 +26,7 @@ set_rollout_length = lambda x: int(min(max(w * (x - x0) + b, y0), y1))
 set_buffer_size = lambda x: set_rollout_length(x) * rollout_batch_size * rollout_retain
 
 main_config = dict(
+    exp_name='hopper_mbpo_200_500_fixedSaveBestM',
     env=dict(
         env_id=env_id,
         norm_obs=dict(use_norm=False, ),
