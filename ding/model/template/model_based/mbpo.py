@@ -33,7 +33,6 @@ class StandardScaler(nn.Module):
 
 
 def init_weights(m):
-
     def truncated_normal_init(t, mean=0.0, std=0.01):
         torch.nn.init.normal_(t, mean=mean, std=std)
         while True:
@@ -76,14 +75,14 @@ class EnsembleFC(nn.Module):
 class EnsembleModel(nn.Module):
 
     def __init__(
-        self,
-        state_size,
-        action_size,
-        reward_size,
-        ensemble_size,
-        hidden_size=200, #1000, 50, 100, 150, 200(origin), 400, 600, 800, 100
-        learning_rate=1e-3,
-        use_decay=False
+            self,
+            state_size,
+            action_size,
+            reward_size,
+            ensemble_size,
+            hidden_size=200,  # 1000, 50, 100, 150, 200(origin), 400, 600, 800, 100
+            learning_rate=1e-3,
+            use_decay=False
     ):
         super(EnsembleModel, self).__init__()
 
@@ -92,8 +91,8 @@ class EnsembleModel(nn.Module):
         self.output_dim = state_size + reward_size
 
         # ensemble1
-        ensemble_size1=3
-        hidden_size=200  # this is dangerous in programming.
+        ensemble_size1 = 3
+        hidden_size = 200  # this is dangerous in programming.
         self.nn1 = EnsembleFC(state_size + action_size, hidden_size, ensemble_size1, weight_decay=0.000025)
         self.nn2 = EnsembleFC(hidden_size, hidden_size, ensemble_size1, weight_decay=0.00005)
         self.nn3 = EnsembleFC(hidden_size, hidden_size, ensemble_size1, weight_decay=0.000075)
@@ -103,8 +102,8 @@ class EnsembleModel(nn.Module):
         self.min_logvar1 = nn.Parameter(torch.ones(1, self.output_dim).float() * -10, requires_grad=False)
 
         # ensemble2
-        ensemble_size2=4
-        hidden_size=500
+        ensemble_size2 = 4
+        hidden_size = 150
         self.nn6 = EnsembleFC(state_size + action_size, hidden_size, ensemble_size2, weight_decay=0.000025)
         self.nn7 = EnsembleFC(hidden_size, hidden_size, ensemble_size2, weight_decay=0.00005)
         self.nn8 = EnsembleFC(hidden_size, hidden_size, ensemble_size2, weight_decay=0.000075)
@@ -113,7 +112,6 @@ class EnsembleModel(nn.Module):
         self.max_logvar2 = nn.Parameter(torch.ones(1, self.output_dim).float() * 0.5, requires_grad=False)
         self.min_logvar2 = nn.Parameter(torch.ones(1, self.output_dim).float() * -10, requires_grad=False)
 
-
         self.swish = Swish()
 
         self.apply(init_weights)
@@ -121,8 +119,8 @@ class EnsembleModel(nn.Module):
         self.optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
     def forward(self, x, ret_log_var=False):
-        x1 = x[:3,:,:]
-        x2 = x[3:,:,:]
+        x1 = x[:3, :, :]
+        x2 = x[3:, :, :]
         nn1_output = self.swish(self.nn1(x1))
         nn2_output = self.swish(self.nn2(nn1_output))
         nn3_output = self.swish(self.nn3(nn2_output))
@@ -132,7 +130,6 @@ class EnsembleModel(nn.Module):
         mean1, logvar1 = nn5_output.chunk(2, dim=2)
         logvar1 = self.max_logvar1 - F.softplus(self.max_logvar1 - logvar1)
         logvar1 = self.min_logvar1 + F.softplus(logvar1 - self.min_logvar1)
-
 
         nn6_output = self.swish(self.nn6(x2))
         nn7_output = self.swish(self.nn7(nn6_output))
@@ -145,9 +142,9 @@ class EnsembleModel(nn.Module):
         logvar2 = self.min_logvar2 + F.softplus(logvar2 - self.min_logvar2)
 
         if ret_log_var:
-            return torch.cat((mean1,mean2),0), torch.cat((logvar1,logvar2),0)
+            return torch.cat((mean1, mean2), 0), torch.cat((logvar1, logvar2), 0)
         else:
-            return torch.cat((mean1,mean2),0), torch.cat((torch.exp(logvar1),torch.exp(logvar2)),0)
+            return torch.cat((mean1, mean2), 0), torch.cat((torch.exp(logvar1), torch.exp(logvar2)), 0)
 
     def get_decay_loss(self):
         decay_loss = 0.
@@ -173,7 +170,8 @@ class EnsembleModel(nn.Module):
     def train(self, loss):
         self.optimizer.zero_grad()
 
-        loss += 0.01 * (torch.sum(self.max_logvar1)+torch.sum(self.max_logvar2)) - 0.01 * (torch.sum(self.min_logvar1)+torch.sum(self.min_logvar2))
+        loss += 0.01 * (torch.sum(self.max_logvar1) + torch.sum(self.max_logvar2)) - 0.01 * (
+                    torch.sum(self.min_logvar1) + torch.sum(self.min_logvar2))
         if self.use_decay:
             loss += self.get_decay_loss()
 
@@ -186,21 +184,21 @@ class EnsembleModel(nn.Module):
 class EnsembleDynamicsModel(nn.Module):
 
     def __init__(
-        self,
-        network_size,
-        elite_size,
-        state_size,
-        action_size,
-        reward_size=1,
-        hidden_size=200, # resize 200 -> 500
-        use_decay=False,
-        batch_size=256,
-        holdout_ratio=0.2,
-        max_epochs_since_update=5,
-        train_freq=250,
-        eval_freq=20,
-        cuda=True,
-        tb_logger=None
+            self,
+            network_size,
+            elite_size,
+            state_size,
+            action_size,
+            reward_size=1,
+            hidden_size=200,  # resize 200 -> 500
+            use_decay=False,
+            batch_size=256,
+            holdout_ratio=0.2,
+            max_epochs_since_update=5,
+            train_freq=250,
+            eval_freq=20,
+            cuda=True,
+            tb_logger=None
     ):
         super(EnsembleDynamicsModel, self).__init__()
         self._cuda = cuda
@@ -317,17 +315,17 @@ class EnsembleDynamicsModel(nn.Module):
                 self.tb_logger.add_scalar('env_model_step/' + k, v, envstep)
 
     def _train(self, inputs, labels):
-        #split
+        # split
         num_holdout = int(inputs.shape[0] * self.holdout_ratio)
         train_inputs, train_labels = inputs[num_holdout:], labels[num_holdout:]
         holdout_inputs, holdout_labels = inputs[:num_holdout], labels[:num_holdout]
 
-        #normalize
+        # normalize
         self.scaler.fit(train_inputs)
         train_inputs = self.scaler.transform(train_inputs)
         holdout_inputs = self.scaler.transform(holdout_inputs)
 
-        #repeat for ensemble
+        # repeat for ensemble
         holdout_inputs = holdout_inputs[None, :, :].repeat(self.network_size, 1, 1)
         holdout_labels = holdout_labels[None, :, :].repeat(self.network_size, 1, 1)
 
@@ -389,8 +387,29 @@ class EnsembleDynamicsModel(nn.Module):
         # for k, v in state_dict.items():
         #     if 'weight' in k or 'bias' in k:
         #         self._states[k].data[id] = copy.deepcopy(v.data[id])
-        state_dict1 = dict(list(state_dict.items())[:13])
-        state_dict2 = dict(list(state_dict.items())[13:])
+        state_dict1 = dict(list(state_dict.items())[:14])
+        state_dict2 = dict(list(state_dict.items())[14:])
+
+        # print(id, 'state_dict1')
+        # for k, v in state_dict1.items():
+        #     if 'weight' in k or 'bias' in k:
+        #         print(k, self._states[k].data.shape)
+
+        # print(id, 'state_dict2')
+        # for k, v in state_dict2.items():
+        #     if 'weight' in k or 'bias' in k:
+        #         print(k, self._states[k].data.shape)
+
+        # clus1 = ['nn1','nn2','nn3','nn4','nn5']
+        # clus2 = ['nn6','nn7','nn8','nn9','nn10']
+
+        # for k, v in state_dict.items():
+        #     if 'weight' in k or 'bias' in k:
+        #         if k.strip().split('.')[1] in clus1:
+        #             self._states[k].data[id] = copy.deepcopy(v.data[id])
+
+        #         if k.strip().split('.')[1] in clus2:
+        #             self._states[k].data[id-3] = copy.deepcopy(v.data[id-3])
 
         if id < 3:
             for k, v in state_dict1.items():  # ensemble1: top 5nn
@@ -400,8 +419,8 @@ class EnsembleDynamicsModel(nn.Module):
             id = id - 3
             for k, v in state_dict2.items():  # ensemble2: end 5nn
                 if 'weight' in k or 'bias' in k:
+                    # print(self._states[k].data.shape)
                     self._states[k].data[id] = copy.deepcopy(v.data[id])
-
 
     def _load_states(self):
         self.load_state_dict(self._states)
