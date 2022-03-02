@@ -167,12 +167,12 @@ class EnsembleModel(nn.Module):
         x6 = x[6:7, :, :]
 
         mean0, logvar0 = self.model0(x0)
-        mean1, logvar1 = self.model0(x1)
-        mean2, logvar2 = self.model0(x2)
-        mean3, logvar3 = self.model0(x3)
-        mean4, logvar4 = self.model0(x4)
-        mean5, logvar5 = self.model0(x5)
-        mean6, logvar6 = self.model0(x6)
+        mean1, logvar1 = self.model1(x1)
+        mean2, logvar2 = self.model2(x2)
+        mean3, logvar3 = self.model3(x3)
+        mean4, logvar4 = self.model4(x4)
+        mean5, logvar5 = self.model5(x5)
+        mean6, logvar6 = self.model6(x6)
         mean = torch.cat((mean0, mean1, mean2, mean3, mean4, mean5, mean6), axis=0)
         logvar = torch.cat((logvar0, logvar1, logvar2, logvar3, logvar4, logvar5, logvar6), axis=0)
 
@@ -381,7 +381,8 @@ class EnsembleDynamicsModel(nn.Module):
         self._epochs_since_update = 0
         self._snapshots = {i: (-1, 1e10) for i in range(self.network_size)}
         self._save_states()
-        for epoch in itertools.count():
+        # for epoch in itertools.count():
+        for epoch in range(2):
 
             train_idx = torch.stack([torch.randperm(train_inputs.shape[0])
                                      for _ in range(self.network_size)]).to(train_inputs.device)
@@ -406,6 +407,7 @@ class EnsembleDynamicsModel(nn.Module):
 
         self._load_states()
         with torch.no_grad():
+            # 输入一样, 输出应该不一样, 但是输出一样了, 又但是nn weight都不一样, 怎么回事? -> 原因是forward内部写错了,7个都写成model0了...
             holdout_mean, holdout_logvar = self.ensemble_model(holdout_inputs, ret_log_var=True)
             _, holdout_mse_loss = self.ensemble_model.loss(holdout_mean, holdout_logvar, holdout_labels)
             # print("==================================")
