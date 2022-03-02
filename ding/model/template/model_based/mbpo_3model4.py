@@ -33,7 +33,6 @@ class StandardScaler(nn.Module):
 
 
 def init_weights(m):
-
     def truncated_normal_init(t, mean=0.0, std=0.01):
         torch.nn.init.normal_(t, mean=mean, std=std)
         while True:
@@ -66,55 +65,86 @@ class EnsembleFC(nn.Module):
         self.bias = nn.Parameter(torch.Tensor(ensemble_size, 1, out_features))
 
     def forward(self, input: torch.Tensor) -> torch.Tensor:
-        assert input.shape[0] == self.ensemble_size and len(input.shape) == 3
+        # assert input.shape[0] == self.ensemble_size and len(input.shape) == 3
         return torch.bmm(input, self.weight) + self.bias  # w times x + b
 
     def extra_repr(self) -> str:
         return 'in_features={}, out_features={}'.format(self.in_features, self.out_features)
 
 
-class SingleModel(nn.Module):
+class EnsembleModel(nn.Module):
 
     def __init__(
-        self,
-        state_size,
-        action_size,
-        reward_size,
-        hidden_size=200,
-        ensemble_size=1,
-        learning_rate=1e-3,
-        use_decay=False
+            self,
+            state_size,
+            action_size,
+            reward_size,
+            ensemble_size,
+            hidden_size=200,  # 1000, 50, 100, 150, 200(origin), 400, 600, 800, 100
+            learning_rate=1e-3,
+            use_decay=False
     ):
-        super(SingleModel, self).__init__()
+        super(EnsembleModel, self).__init__()
 
         self.use_decay = use_decay
         self.hidden_size = hidden_size
         self.output_dim = state_size + reward_size
 
-        self.nn1 = EnsembleFC(state_size + action_size, hidden_size, ensemble_size, weight_decay=0.000025)
-        self.nn2 = EnsembleFC(hidden_size, hidden_size, ensemble_size, weight_decay=0.00005)
-        self.nn3 = EnsembleFC(hidden_size, hidden_size, ensemble_size, weight_decay=0.000075)
-        self.nn4 = EnsembleFC(hidden_size, hidden_size, ensemble_size, weight_decay=0.000075)
-        self.nn5 = EnsembleFC(hidden_size, self.output_dim * 2, ensemble_size, weight_decay=0.0001)
+        # ensemble1
+        ensemble_size1 = 3
+        hidden_size = 200  # this is dangerous in programming.
+        self.nn1 = EnsembleFC(state_size + action_size, hidden_size, ensemble_size1, weight_decay=0.000025)
+        self.nn2 = EnsembleFC(hidden_size, hidden_size, ensemble_size1, weight_decay=0.00005)
+        self.nn3 = EnsembleFC(hidden_size, hidden_size, ensemble_size1, weight_decay=0.000075)
+        self.nn4 = EnsembleFC(hidden_size, hidden_size, ensemble_size1, weight_decay=0.000075)
+        self.nn5 = EnsembleFC(hidden_size, self.output_dim * 2, ensemble_size1, weight_decay=0.0001)
+        self.max_logvar1 = nn.Parameter(torch.ones(1, self.output_dim).float() * 0.5, requires_grad=False)
+        self.min_logvar1 = nn.Parameter(torch.ones(1, self.output_dim).float() * -10, requires_grad=False)
+
+        # ensemble2
+        ensemble_size2 = 4
+        hidden_size = 150
+        self.nn6 = EnsembleFC(state_size + action_size, hidden_size, ensemble_size2, weight_decay=0.000025)
+        self.nn7 = EnsembleFC(hidden_size, hidden_size, ensemble_size2, weight_decay=0.00005)
+        self.nn8 = EnsembleFC(hidden_size, hidden_size, ensemble_size2, weight_decay=0.000075)
+        self.nn9 = EnsembleFC(hidden_size, hidden_size, ensemble_size2, weight_decay=0.000075)
+        self.nn10 = EnsembleFC(hidden_size, self.output_dim * 2, ensemble_size2, weight_decay=0.0001)
+        self.max_logvar2 = nn.Parameter(torch.ones(1, self.output_dim).float() * 0.5, requires_grad=False)
+        self.min_logvar2 = nn.Parameter(torch.ones(1, self.output_dim).float() * -10, requires_grad=False)
+
         self.swish = Swish()
 
         self.apply(init_weights)
 
         self.optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
 
-    def forward(self, x):
-        nn1_output = self.swish(self.nn1(x))
+    def forward(self, x, ret_log_var=False):
+        x1 = x[:3, :, :]
+        x2 = x[3:, :, :]
+        nn1_output = self.swish(self.nn1(x1))
         nn2_output = self.swish(self.nn2(nn1_output))
         nn3_output = self.swish(self.nn3(nn2_output))
         nn4_output = self.swish(self.nn4(nn3_output))
         nn5_output = self.nn5(nn4_output)
 
-        mean, logvar = nn5_output.chunk(2, dim=2)
-        # logvar = self.max_logvar - F.softplus(self.max_logvar - logvar)
-        # logvar = self.min_logvar + F.softplus(logvar - self.min_logvar)
+        mean1, logvar1 = nn5_output.chunk(2, dim=2)
+        logvar1 = self.max_logvar1 - F.softplus(self.max_logvar1 - logvar1)
+        logvar1 = self.min_logvar1 + F.softplus(logvar1 - self.min_logvar1)
 
-        return mean, logvar
+        nn6_output = self.swish(self.nn6(x2))
+        nn7_output = self.swish(self.nn7(nn6_output))
+        nn8_output = self.swish(self.nn8(nn7_output))
+        nn9_output = self.swish(self.nn9(nn8_output))
+        nn10_output = self.nn10(nn9_output)
 
+        mean2, logvar2 = nn10_output.chunk(2, dim=2)
+        logvar2 = self.max_logvar2 - F.softplus(self.max_logvar2 - logvar2)
+        logvar2 = self.min_logvar2 + F.softplus(logvar2 - self.min_logvar2)
+
+        if ret_log_var:
+            return torch.cat((mean1, mean2), 0), torch.cat((logvar1, logvar2), 0)
+        else:
+            return torch.cat((mean1, mean2), 0), torch.cat((torch.exp(logvar1), torch.exp(logvar2)), 0)
 
     def get_decay_loss(self):
         decay_loss = 0.
@@ -122,67 +152,6 @@ class SingleModel(nn.Module):
             if isinstance(m, EnsembleFC):
                 decay_loss += m.weight_decay * torch.sum(torch.square(m.weight)) / 2.
         return decay_loss
-
-
-
-
-class EnsembleModel(nn.Module):
-
-    def __init__(
-        self,
-        state_size,
-        action_size,
-        reward_size,
-        ensemble_size,
-        hidden_size: list,
-        learning_rate=1e-3,
-        use_decay=False
-    ):
-        super(EnsembleModel, self).__init__()
-
-        self.use_decay = use_decay
-        self.output_dim = state_size + reward_size
-
-        assert ensemble_size == 7
-        self.model0 = SingleModel(state_size, action_size, reward_size, hidden_size[0], use_decay=use_decay)
-        self.model1 = SingleModel(state_size, action_size, reward_size, hidden_size[1], use_decay=use_decay)
-        self.model2 = SingleModel(state_size, action_size, reward_size, hidden_size[2], use_decay=use_decay)
-        self.model3 = SingleModel(state_size, action_size, reward_size, hidden_size[3], use_decay=use_decay)
-        self.model4 = SingleModel(state_size, action_size, reward_size, hidden_size[4], use_decay=use_decay)
-        self.model5 = SingleModel(state_size, action_size, reward_size, hidden_size[5], use_decay=use_decay)
-        self.model6 = SingleModel(state_size, action_size, reward_size, hidden_size[6], use_decay=use_decay)
-
-        self.max_logvar = nn.Parameter(torch.ones(1, self.output_dim).float() * 0.5, requires_grad=False)
-        self.min_logvar = nn.Parameter(torch.ones(1, self.output_dim).float() * -10, requires_grad=False)
-
-        self.optimizer = torch.optim.Adam(self.parameters(), lr=learning_rate)
-
-    def forward(self, x, ret_log_var=False):
-        x0 = x[0:1, :, :]
-        x1 = x[1:2, :, :]
-        x2 = x[2:3, :, :]
-        x3 = x[3:4, :, :]
-        x4 = x[4:5, :, :]
-        x5 = x[5:6, :, :]
-        x6 = x[6:7, :, :]
-
-        mean0, logvar0 = self.model0(x0)
-        mean1, logvar1 = self.model0(x1)
-        mean2, logvar2 = self.model0(x2)
-        mean3, logvar3 = self.model0(x3)
-        mean4, logvar4 = self.model0(x4)
-        mean5, logvar5 = self.model0(x5)
-        mean6, logvar6 = self.model0(x6)
-        mean = torch.cat((mean0, mean1, mean2, mean3, mean4, mean5, mean6), axis=0)
-        logvar = torch.cat((logvar0, logvar1, logvar2, logvar3, logvar4, logvar5, logvar6), axis=0)
-
-        logvar = self.max_logvar - F.softplus(self.max_logvar - logvar)
-        logvar = self.min_logvar + F.softplus(logvar - self.min_logvar)
-
-        if ret_log_var:
-            return mean, logvar
-        else:
-            return mean, torch.exp(logvar)
 
     def loss(self, mean, logvar, labels):
         """
@@ -196,48 +165,40 @@ class EnsembleModel(nn.Module):
         var_loss = logvar.mean(dim=(1, 2))
         mse_loss = torch.pow(mean - labels, 2).mean(dim=(1, 2))
         total_loss = mse_loss_inv.sum() + var_loss.sum()
-        # print("==================================")
-        # print(mse_loss)  # 先不一致, 后一致?
-        # print("==================================")
         return total_loss, mse_loss
 
     def train(self, loss):
         self.optimizer.zero_grad()
 
-        loss += 0.01 * torch.sum(self.max_logvar) - 0.01 * torch.sum(self.min_logvar)
+        loss += 0.01 * (torch.sum(self.max_logvar1) + torch.sum(self.max_logvar2)) - 0.01 * (
+                    torch.sum(self.min_logvar1) + torch.sum(self.min_logvar2))
         if self.use_decay:
-            loss += self.model0.get_decay_loss()
-            loss += self.model1.get_decay_loss()
-            loss += self.model2.get_decay_loss()
-            loss += self.model3.get_decay_loss()
-            loss += self.model4.get_decay_loss()
-            loss += self.model5.get_decay_loss()
-            loss += self.model6.get_decay_loss()
+            loss += self.get_decay_loss()
 
         loss.backward()
-        self.optimizer.step()
 
+        self.optimizer.step()
 
 
 @MODEL_REGISTRY.register('mbpo')
 class EnsembleDynamicsModel(nn.Module):
 
     def __init__(
-        self,
-        network_size,
-        elite_size,
-        state_size,
-        action_size,
-        reward_size=1,
-        hidden_size=200,
-        use_decay=False,
-        batch_size=256,
-        holdout_ratio=0.2,
-        max_epochs_since_update=5,
-        train_freq=250,
-        eval_freq=20,
-        cuda=True,
-        tb_logger=None
+            self,
+            network_size,
+            elite_size,
+            state_size,
+            action_size,
+            reward_size=1,
+            hidden_size=200,  # resize 200 -> 500
+            use_decay=False,
+            batch_size=256,
+            holdout_ratio=0.2,
+            max_epochs_since_update=5,
+            train_freq=250,
+            eval_freq=20,
+            cuda=True,
+            tb_logger=None
     ):
         super(EnsembleDynamicsModel, self).__init__()
         self._cuda = cuda
@@ -320,17 +281,7 @@ class EnsembleDynamicsModel(nn.Module):
             loss, mse_loss = self.ensemble_model.loss(mean, logvar, labels)
             ensemble_mse_loss = torch.pow(mean.mean(0) - labels[0], 2)
             model_variance = mean.var(0)
-            # print("==================================")
-            # print(mse_loss)  # tensor([0.0266, 0.0266, 0.0266, 0.0266, 0.0266, 0.0266, 0.0266], device='cuda:0')
-            # print("==================================")
-            self.tb_logger.add_scalar('env_model_step/eval_model0_mse_loss', mse_loss[0].item(), envstep)
-            self.tb_logger.add_scalar('env_model_step/eval_model1_mse_loss', mse_loss[1].item(), envstep)
-            self.tb_logger.add_scalar('env_model_step/eval_model2_mse_loss', mse_loss[2].item(), envstep)
-            self.tb_logger.add_scalar('env_model_step/eval_model3_mse_loss', mse_loss[3].item(), envstep)
-            self.tb_logger.add_scalar('env_model_step/eval_model4_mse_loss', mse_loss[4].item(), envstep)
-            self.tb_logger.add_scalar('env_model_step/eval_model5_mse_loss', mse_loss[5].item(), envstep)
-            self.tb_logger.add_scalar('env_model_step/eval_model6_mse_loss', mse_loss[6].item(), envstep)
-
+            self.tb_logger.add_scalar('env_model_step/eval_total_loss', loss.mean().item(), envstep)
             self.tb_logger.add_scalar('env_model_step/eval_mse_loss', mse_loss.mean().item(), envstep)
             self.tb_logger.add_scalar('env_model_step/eval_ensemble_mse_loss', ensemble_mse_loss.mean().item(), envstep)
             self.tb_logger.add_scalar('env_model_step/eval_model_variances', model_variance.mean().item(), envstep)
@@ -364,17 +315,17 @@ class EnsembleDynamicsModel(nn.Module):
                 self.tb_logger.add_scalar('env_model_step/' + k, v, envstep)
 
     def _train(self, inputs, labels):
-        #split
+        # split
         num_holdout = int(inputs.shape[0] * self.holdout_ratio)
         train_inputs, train_labels = inputs[num_holdout:], labels[num_holdout:]
         holdout_inputs, holdout_labels = inputs[:num_holdout], labels[:num_holdout]
 
-        #normalize
+        # normalize
         self.scaler.fit(train_inputs)
         train_inputs = self.scaler.transform(train_inputs)
         holdout_inputs = self.scaler.transform(holdout_inputs)
 
-        #repeat for ensemble
+        # repeat for ensemble
         holdout_inputs = holdout_inputs[None, :, :].repeat(self.network_size, 1, 1)
         holdout_labels = holdout_labels[None, :, :].repeat(self.network_size, 1, 1)
 
@@ -408,9 +359,6 @@ class EnsembleDynamicsModel(nn.Module):
         with torch.no_grad():
             holdout_mean, holdout_logvar = self.ensemble_model(holdout_inputs, ret_log_var=True)
             _, holdout_mse_loss = self.ensemble_model.loss(holdout_mean, holdout_logvar, holdout_labels)
-            # print("==================================")
-            # print(holdout_mse_loss)  # tensor([0.0256, 0.0256, 0.0256, 0.0256, 0.0256, 0.0256, 0.0256], device='cuda:0')
-            # print("==================================")
             sorted_loss, sorted_loss_idx = holdout_mse_loss.sort()
             sorted_loss = sorted_loss.detach().cpu().numpy().tolist()
             sorted_loss_idx = sorted_loss_idx.detach().cpu().numpy().tolist()
@@ -419,10 +367,9 @@ class EnsembleDynamicsModel(nn.Module):
             self.middle_holdout_mse_loss = sorted_loss[self.network_size // 2]
             self.bottom_holdout_mse_loss = sorted_loss[-1]
             self.best_holdout_mse_loss = holdout_mse_loss.mean().item()
-            # print("==================================")
-            # print(holdout_mse_loss)  # tensor([0.0256, 0.0256, 0.0256, 0.0256, 0.0256, 0.0256, 0.0256], device='cuda:0')
-            # print("==================================")
-
+            # assert math.fabs(self.curr_holdout_mse_loss - self.best_holdout_mse_loss) < 1e-3, '{} vs {}'.format(
+            #     self.curr_holdout_mse_loss, self.best_holdout_mse_loss
+            # )
         return {
             'mse_loss': self.mse_loss,
             'curr_holdout_mse_loss': self.curr_holdout_mse_loss,
@@ -430,27 +377,50 @@ class EnsembleDynamicsModel(nn.Module):
             'top_holdout_mse_loss': self.top_holdout_mse_loss,
             'middle_holdout_mse_loss': self.middle_holdout_mse_loss,
             'bottom_holdout_mse_loss': self.bottom_holdout_mse_loss,
-            'model0_mse_loss':holdout_mse_loss[0].item(),
-            'model1_mse_loss':holdout_mse_loss[1].item(),
-            'model2_mse_loss':holdout_mse_loss[2].item(),
-            'model3_mse_loss':holdout_mse_loss[3].item(),
-            'model4_mse_loss':holdout_mse_loss[4].item(),
-            'model5_mse_loss':holdout_mse_loss[5].item(),
-            'model6_mse_loss':holdout_mse_loss[6].item(),
         }
 
     def _save_states(self, ):
         self._states = copy.deepcopy(self.state_dict())
 
-    def _save_state(self, id):
-        key_in = 'model'+str(id)
+    def _save_state(self, id):  # code refactor
         state_dict = self.state_dict()
-        for k, v in state_dict.items():
-            if key_in in k:
-                self._states[k].data = copy.deepcopy(v.data)
+        # for k, v in state_dict.items():
+        #     if 'weight' in k or 'bias' in k:
+        #         self._states[k].data[id] = copy.deepcopy(v.data[id])
+        state_dict1 = dict(list(state_dict.items())[:14])
+        state_dict2 = dict(list(state_dict.items())[14:])
 
-            # if 'weight' in k or 'bias' in k:
-            #     self._states[k].data[id] = copy.deepcopy(v.data[id])
+        # print(id, 'state_dict1')
+        # for k, v in state_dict1.items():
+        #     if 'weight' in k or 'bias' in k:
+        #         print(k, self._states[k].data.shape)
+
+        # print(id, 'state_dict2')
+        # for k, v in state_dict2.items():
+        #     if 'weight' in k or 'bias' in k:
+        #         print(k, self._states[k].data.shape)
+
+        # clus1 = ['nn1','nn2','nn3','nn4','nn5']
+        # clus2 = ['nn6','nn7','nn8','nn9','nn10']
+
+        # for k, v in state_dict.items():
+        #     if 'weight' in k or 'bias' in k:
+        #         if k.strip().split('.')[1] in clus1:
+        #             self._states[k].data[id] = copy.deepcopy(v.data[id])
+
+        #         if k.strip().split('.')[1] in clus2:
+        #             self._states[k].data[id-3] = copy.deepcopy(v.data[id-3])
+
+        if id < 3:
+            for k, v in state_dict1.items():  # ensemble1: top 5nn
+                if 'weight' in k or 'bias' in k:
+                    self._states[k].data[id] = copy.deepcopy(v.data[id])
+        else:
+            id = id - 3
+            for k, v in state_dict2.items():  # ensemble2: end 5nn
+                if 'weight' in k or 'bias' in k:
+                    # print(self._states[k].data.shape)
+                    self._states[k].data[id] = copy.deepcopy(v.data[id])
 
     def _load_states(self):
         self.load_state_dict(self._states)
