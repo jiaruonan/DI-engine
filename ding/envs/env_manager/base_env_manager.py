@@ -1,5 +1,5 @@
 from types import MethodType
-from typing import Union, Any, List, Callable, Dict, Optional
+from typing import Tuple, Union, Any, List, Callable, Dict, Optional
 from functools import partial, wraps
 from easydict import EasyDict
 import copy
@@ -9,7 +9,7 @@ import numbers
 import logging
 import enum
 import time
-import traceback
+
 from ding.utils import ENV_MANAGER_REGISTRY, import_module, one_time_warning
 from ding.envs.env.base_env import BaseEnvTimestep
 from ding.utils.time_helper import WatchDog
@@ -22,6 +22,7 @@ class EnvState(enum.IntEnum):
     RESET = 3
     DONE = 4
     ERROR = 5
+    NEED_RESET = 6
 
 
 def timeout_wrapper(func: Callable = None, timeout: Optional[int] = None) -> Callable:
@@ -63,9 +64,10 @@ class BaseEnvManager(object):
     Overview:
         Create a BaseEnvManager to manage multiple environments.
     Interfaces:
-        reset, step, seed, close, enable_save_replay, launch, env_info, default_config
+        reset, step, seed, close, enable_save_replay, launch, default_config, env_state_done
     Properties:
-        env_num, ready_obs, done, method_name_list，active_env
+        env_num, ready_obs, done, method_name_list
+        observation_space, action_space, reward_space
     """
 
     @classmethod
@@ -103,6 +105,11 @@ class BaseEnvManager(object):
         self._env_replay_path = None
         # env_ref is used to acquire some common attributes of env, like obs_shape and act_shape
         self._env_ref = self._env_fn[0]()
+        self._env_ref.reset()
+        self._observation_space = self._env_ref.observation_space
+        self._action_space = self._env_ref.action_space
+        self._reward_space = self._env_ref.reward_space
+        self._env_ref.close()
         self._env_states = {i: EnvState.VOID for i in range(self._env_num)}
         self._env_seed = {i: None for i in range(self._env_num)}
 
@@ -120,6 +127,18 @@ class BaseEnvManager(object):
         return self._env_num
 
     @property
+    def observation_space(self) -> 'gym.spaces.Space':  # noqa
+        return self._observation_space
+
+    @property
+    def action_space(self) -> 'gym.spaces.Space':  # noqa
+        return self._action_space
+
+    @property
+    def reward_space(self) -> 'gym.spaces.Space':  # noqa
+        return self._reward_space
+
+    @property
     def ready_obs(self) -> Dict[int, Any]:
         """
         Overview:
@@ -130,7 +149,8 @@ class BaseEnvManager(object):
             >>>     obs_dict = env_manager.ready_obs
             >>>     actions_dict = {env_id: model.forward(obs) for env_id, obs in obs_dict.items())}
         """
-        return {i: self._ready_obs[i] for i in range(self.env_num) if self._env_episode_count[i] < self._episode_num}
+        active_env = [i for i, s in self._env_states.items() if s == EnvState.RUN]
+        return {i: self._ready_obs[i] for i in active_env}
 
     @property
     def done(self) -> bool:
@@ -140,9 +160,8 @@ class BaseEnvManager(object):
     def method_name_list(self) -> list:
         return ['reset', 'step', 'seed', 'close', 'enable_save_replay']
 
-    @property
-    def active_env(self) -> List[int]:
-        return [i for i, s in self._env_states.items() if s == EnvState.RUN]
+    def env_state_done(self, env_id: int) -> bool:
+        return self._env_states[env_id] == EnvState.DONE
 
     def __getattr__(self, key: str) -> Any:
         """
@@ -183,8 +202,6 @@ class BaseEnvManager(object):
         self._env_episode_count = {i: 0 for i in range(self.env_num)}
         self._ready_obs = {i: None for i in range(self.env_num)}
         self._envs = [e() for e in self._env_fn]
-        # env_ref is used to acquire some common attributes of env, like obs_shape and act_shape
-        self._env_ref = self._envs[0]
         assert len(self._envs) == self._env_num
         self._reset_param = {i: {} for i in range(self.env_num)}
         self._env_states = {i: EnvState.INIT for i in range(self.env_num)}
@@ -222,7 +239,6 @@ class BaseEnvManager(object):
             if self._env_replay_path is not None and self._env_states[env_id] == EnvState.RUN:
                 logging.warning("please don't reset a unfinished env when you enable save replay, we just skip it")
                 continue
-            self._env_states[env_id] = EnvState.RESET
             self._reset(env_id)
 
     def _reset(self, env_id: int) -> None:
@@ -239,6 +255,7 @@ class BaseEnvManager(object):
         exceptions = []
         for _ in range(self._max_retry):
             try:
+                self._env_states[env_id] = EnvState.RESET
                 obs = reset_fn()
                 self._ready_obs[env_id] = obs
                 self._env_states[env_id] = EnvState.RUN
@@ -289,9 +306,11 @@ class BaseEnvManager(object):
             timesteps[env_id] = self._step(env_id, act)
             if timesteps[env_id].done:
                 self._env_episode_count[env_id] += 1
-                if self._env_episode_count[env_id] < self._episode_num and self._auto_reset:
-                    self._env_states[env_id] = EnvState.RESET
-                    self._reset(env_id)
+                if self._env_episode_count[env_id] < self._episode_num:
+                    if self._auto_reset:
+                        self._reset(env_id)
+                    else:
+                        self._env_states[env_id] = EnvState.NEED_RESET
                 else:
                     self._env_states[env_id] = EnvState.DONE
             else:
@@ -362,21 +381,11 @@ class BaseEnvManager(object):
         """
         if self._closed:
             return
-        self._env_ref.close()
         for env in self._envs:
             env.close()
         for i in range(self._env_num):
             self._env_states[i] = EnvState.VOID
         self._closed = True
-
-    def env_info(self) -> namedtuple:
-        """
-        Overview:
-            Get one env's info, for example, action space, observation space, reward space, etc.
-        Returnns:
-            - info (:obj:`namedtuple`): Usually a namedtuple ``BaseEnvInfo``, each element is ``EnvElementInfo``.
-        """
-        return self._env_ref.info()
 
 
 def create_env_manager(manager_cfg: dict, env_fn: List[Callable]) -> BaseEnvManager:

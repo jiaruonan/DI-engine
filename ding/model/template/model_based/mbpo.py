@@ -233,6 +233,8 @@ class EnsembleDynamicsModel(nn.Module):
         next_obs = data['next_obs']
         if len(reward.shape) == 1:
             reward = reward.unsqueeze(1)
+        if len(action.shape) == 1:
+            action = action.unsqueeze(1)
 
         # build eval samples
         inputs = torch.cat([obs, action], dim=1)
@@ -272,6 +274,8 @@ class EnsembleDynamicsModel(nn.Module):
         next_obs = data['next_obs']
         if len(reward.shape) == 1:
             reward = reward.unsqueeze(1)
+        if len(action.shape) == 1:
+            action = action.unsqueeze(1)
         # build train samples
         inputs = torch.cat([obs, action], dim=1)
         labels = torch.cat([reward, next_obs - obs], dim=1)
@@ -339,9 +343,6 @@ class EnsembleDynamicsModel(nn.Module):
             self.middle_holdout_mse_loss = sorted_loss[self.network_size // 2]
             self.bottom_holdout_mse_loss = sorted_loss[-1]
             self.best_holdout_mse_loss = holdout_mse_loss.mean().item()
-            assert math.fabs(self.curr_holdout_mse_loss - self.best_holdout_mse_loss) < 1e-3, '{} vs {}'.format(
-                self.curr_holdout_mse_loss, self.best_holdout_mse_loss
-            )
         return {
             'mse_loss': self.mse_loss,
             'curr_holdout_mse_loss': self.curr_holdout_mse_loss,
@@ -388,6 +389,8 @@ class EnsembleDynamicsModel(nn.Module):
     def batch_predict(self, obs, action):
         # to predict a batch
         # norm and repeat for ensemble
+        if len(action.shape) == 1:
+            action = action.unsqueeze(1)
         inputs = self.scaler.transform(torch.cat([obs, action], dim=-1)).unsqueeze(0).repeat(self.network_size, 1, 1)
         # predict
         outputs, _ = self.ensemble_model(inputs, ret_log_var=False)
@@ -397,6 +400,8 @@ class EnsembleDynamicsModel(nn.Module):
     def predict(self, obs, act, batch_size=8192, deterministic=True):
         # to predict the whole buffer and return cpu tensor
         # form inputs
+        if len(act.shape) == 1:
+            act = act.unsqueeze(1)
         if self._cuda:
             obs = obs.cuda()
             act = act.cuda()
@@ -425,3 +430,4 @@ class EnsembleDynamicsModel(nn.Module):
         rewards, next_obs = sample[:, :1], sample[:, 1:]
 
         return rewards.detach().cpu(), next_obs.detach().cpu()
+

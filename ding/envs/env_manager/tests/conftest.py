@@ -1,12 +1,13 @@
 import random
 import time
 from collections import namedtuple
-
 import pytest
 import torch
 import numpy as np
 from easydict import EasyDict
 from functools import partial
+import gym
+
 from ding.envs.common.env_element import EnvElement, EnvElementInfo
 from ding.envs.env.base_env import BaseEnvTimestep, BaseEnvInfo
 from ding.envs.env_manager.base_env_manager import EnvState
@@ -18,7 +19,8 @@ from ding.utils import deep_merge_dicts
 class FakeEnv(object):
 
     def __init__(self, cfg):
-        self._target_time = random.randint(3, 6)
+        self._scale = cfg.scale
+        self._target_time = random.randint(3, 6) * self._scale
         self._current_time = 0
         self._name = cfg['name']
         self._id = time.time()
@@ -29,8 +31,15 @@ class FakeEnv(object):
         self._launched = False
         self._state = EnvState.INIT
         self._dead_once = False
+        self.observation_space = gym.spaces.Box(
+            low=np.array([-1.0, -1.0, -8.0]), high=np.array([1.0, 1.0, 8.0]), shape=(3, ), dtype=np.float32
+        )
+        self.action_space = gym.spaces.Box(low=-2.0, high=2.0, shape=(1, ), dtype=np.float32)
+        self.reward_space = gym.spaces.Box(
+            low=-1 * (3.14 * 3.14 + 0.1 * 8 * 8 + 0.001 * 2 * 2), high=0.0, shape=(1, ), dtype=np.float32
+        )
 
-    def reset(self, stat):
+    def reset(self, stat=None):
         if isinstance(stat, str) and stat == 'error':
             self.dead()
         if isinstance(stat, str) and stat == 'error_once':
@@ -49,6 +58,7 @@ class FakeEnv(object):
         self._current_time = 0
         self._stat = stat
         self._state = EnvState.RUN
+        return to_ndarray(torch.randn(3))
 
     def step(self, action):
         assert self._launched
@@ -68,7 +78,7 @@ class FakeEnv(object):
         done = self._current_time >= self._target_time
         if done:
             self._state = EnvState.DONE
-        simulation_time = random.uniform(0.5, 1)
+        simulation_time = random.uniform(0.5, 1) * self._scale
         info = {'name': self._name, 'time': simulation_time, 'tgt': self._target_time, 'cur': self._current_time}
         time.sleep(simulation_time)
         self._current_time += simulation_time
@@ -82,26 +92,6 @@ class FakeEnv(object):
     def block(self):
         self._state = EnvState.ERROR
         time.sleep(1000)
-
-    def info(self):
-        T = EnvElementInfo
-        return BaseEnvInfo(
-            agent_num=1,
-            obs_space=T((3, ), {
-                'min': [-1.0, -1.0, -8.0],
-                'max': [1.0, 1.0, 8.0],
-                'dtype': np.float32,
-            }),
-            act_space=T((1, ), {
-                'min': -2.0,
-                'max': 2.0,
-            }),
-            rew_space=T((1, ), {
-                'min': -1 * (3.14 * 3.14 + 0.1 * 8 * 8 + 0.001 * 2 * 2),
-                'max': -0.0,
-            }),
-            use_wrappers=None,
-        )
 
     def close(self):
         self._launched = False
@@ -127,9 +117,9 @@ class FakeEnv(object):
 
 class FakeAsyncEnv(FakeEnv):
 
-    def reset(self, stat):
+    def reset(self, stat=None):
         super().reset(stat)
-        time.sleep(random.randint(1, 3))
+        time.sleep(random.randint(1, 3) * self._scale)
         return to_ndarray(torch.randn(3))
 
 
@@ -154,6 +144,7 @@ def get_base_manager_cfg(env_num=4):
     manager_cfg = {
         'env_cfg': [{
             'name': 'name{}'.format(i),
+            'scale': 1.0,
         } for i in range(env_num)],
         'episode_num': 2,
         'reset_timeout': 10,
@@ -167,6 +158,7 @@ def get_subprecess_manager_cfg(env_num=4):
     manager_cfg = {
         'env_cfg': [{
             'name': 'name{}'.format(i),
+            'scale': 1.0,
         } for i in range(env_num)],
         'episode_num': 2,
         #'step_timeout': 8,
@@ -182,6 +174,16 @@ def get_subprecess_manager_cfg(env_num=4):
 def setup_base_manager_cfg():
     manager_cfg = get_base_manager_cfg(4)
     env_cfg = manager_cfg.pop('env_cfg')
+    manager_cfg['env_fn'] = [partial(FakeEnv, cfg=c) for c in env_cfg]
+    return deep_merge_dicts(BaseEnvManager.default_config(), EasyDict(manager_cfg))
+
+
+@pytest.fixture(scope='function')
+def setup_fast_base_manager_cfg():
+    manager_cfg = get_base_manager_cfg(4)
+    env_cfg = manager_cfg.pop('env_cfg')
+    for e in env_cfg:
+        e['scale'] = 0.1
     manager_cfg['env_fn'] = [partial(FakeEnv, cfg=c) for c in env_cfg]
     return deep_merge_dicts(BaseEnvManager.default_config(), EasyDict(manager_cfg))
 
