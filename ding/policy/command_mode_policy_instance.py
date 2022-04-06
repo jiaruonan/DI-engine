@@ -244,11 +244,6 @@ class SACNCommandModelPolicy(SACNstepPolicy, DummyCommandModePolicy):
     pass
 
 
-@POLICY_REGISTRY.register('sac_nstep_command')
-class SACCommandModePolicy(SACNstepPolicy, DummyCommandModePolicy):
-    pass
-
-
 @POLICY_REGISTRY.register('cql_command')
 class CQLCommandModePolicy(CQLPolicy, DummyCommandModePolicy):
     pass

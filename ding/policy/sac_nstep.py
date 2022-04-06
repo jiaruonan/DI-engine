@@ -99,8 +99,8 @@ class SACNstepPolicy(SACPolicy):
             # value_network=False,
 
             # (str type) action_space: Use reparameterization trick for continous action
-            # action_space='reparameterization',  # new version of di-engine
-            actor_head_type='reparameterization',
+            action_space='reparameterization',
+            # actor_head_type='reparameterization', # old version of di-engine
         ),
         learn=dict(
             # 

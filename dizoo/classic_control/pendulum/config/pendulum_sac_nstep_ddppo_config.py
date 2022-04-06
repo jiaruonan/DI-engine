@@ -13,7 +13,7 @@ k = 3
 reg = 1
 
 # gpu
-cuda = False
+cuda = True
 
 # model training hypo
 rollout_batch_size = 10000
@@ -49,8 +49,8 @@ main_config = dict(
             obs_shape=obs_shape,
             action_shape=action_shape,
             twin_critic=True,
-            actor_head_type='reparameterization',
-            # action_space='reparameterization',  # new version of di-engine
+            # actor_head_type='reparameterization',  # old version of di-engine
+            action_space='reparameterization',
             actor_head_hidden_size=128,
             critic_head_hidden_size=128,
         ),
