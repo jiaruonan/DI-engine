@@ -99,7 +99,8 @@ class SACNstepPolicy(SACPolicy):
             # value_network=False,
 
             # (str type) action_space: Use reparameterization trick for continous action
-            action_space='reparameterization',
+            # action_space='reparameterization',  # new version of di-engine
+            actor_head_type='reparameterization',
         ),
         learn=dict(
             # 
@@ -329,8 +330,8 @@ class SACNstepPolicy(SACPolicy):
             action = torch.tanh(pred)
             # keep dimension for loss computation (usually for action space is 1 env. e.g. pendulum)
             log_prob = dist.log_prob(pred) + 2 * torch.log(torch.cosh(pred)).sum(-1)
-            reward, obs  = self._env_model.batch_predict(obs, action)
-            policy_loss += (self._gamma ** i) * (self._alpha * log_prob  - reward).mean()
+            reward, obs = self._env_model.batch_predict(obs, action)
+            policy_loss += (self._gamma ** i) * (self._alpha * log_prob - reward).mean()
 
         # calculate the q value for the final state
         (mu, sigma) = self._learn_model.forward(obs, mode='compute_actor')['logit']
