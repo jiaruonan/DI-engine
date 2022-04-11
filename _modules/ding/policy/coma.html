@@ -88,11 +88,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../quick_start/index.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../key_concept/index.html">Key Concept</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../intro_rl/index.html">Introduction to RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../env_tutorial/index.html">RL Environment Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../hands_on/index.html">Hands on RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hands_on/index.html">RL Algorithm Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../env_tutorial/index.html">RL Environments Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../distributed/index.html">Distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../best_practice/index.html">Best Practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api_doc/index.html">API Doc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../faq/index_en.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq/index.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../feature/index.html">Feature</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
@@ -100,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../guide/index.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial_dev/index.html">Tutorial-Developer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../architecture/index.html">Architecture Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../specification/index.html">Middleware code specification</a></li>
 </ul>
 
             
@@ -249,7 +251,7 @@
         <span class="p">),</span>
         <span class="n">collect</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
             <span class="c1"># (int) collect n_sample data, train model n_iteration time</span>
-            <span class="n">n_episode</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+            <span class="c1"># n_episode=32,</span>
             <span class="c1"># (int) unroll length of a train iteration(gradient update step)</span>
             <span class="n">unroll_len</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
         <span class="p">),</span>
@@ -529,6 +531,7 @@
 <span class="sd">            Return this algorithm default model setting for demonstration.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            - model_info (:obj:`Tuple[str, List[str]]`): model name and mode import_names</span>
+
 <span class="sd">        .. note::</span>
 <span class="sd">            The user can define and use customized network model but must obey the same inferface definition indicated \</span>
 <span class="sd">            by import_names path. For coma, ``ding.model.coma.coma``</span>

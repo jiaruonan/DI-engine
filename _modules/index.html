@@ -52,7 +52,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> DI-engine
+            <a href="../index_zh.html" class="icon icon-home"> DI-engine
           
 
           
@@ -82,24 +82,26 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+              <p class="caption" role="heading"><span class="caption-text">使用者指南</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../quick_start/index.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index_zh.html">安装说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start/index_zh.html">快速上手</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../key_concept/index.html">Key Concept</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../intro_rl/index.html">Introduction to RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../env_tutorial/index.html">RL Environment Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hands_on/index.html">Hands on RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../best_practice/index.html">Best Practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro_rl/index_zh.html">强化学习基础概念介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hands_on/index_zh.html">强化学习算法攻略合集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../env_tutorial/index_zh.html">强化学习环境示例手册</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed/index_zh.html">分布式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../best_practice/index_zh.html">最佳实践</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_doc/index.html">API Doc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../faq/index_en.html">FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../feature/index.html">Feature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index_zh.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature/index_zh.html">特性介绍</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<p class="caption" role="heading"><span class="caption-text">开发者指南</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../guide/index.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/index_zh.html">开发者指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial_dev/index.html">Tutorial-Developer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../specification/index_zh.html">中间件（middleware）编写规范</a></li>
 </ul>
 
             
@@ -114,7 +116,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">DI-engine</a>
+          <a href="../index_zh.html">DI-engine</a>
         
       </nav>
 
@@ -143,7 +145,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index_zh.html">Docs</a> &raquo;</li>
         
       <li>Overview: module code</li>
     
@@ -162,10 +164,14 @@
             
   <h1>All modules for which code is available</h1>
 <ul><li><a href="ding/config/config.html">ding.config.config</a></li>
+<li><a href="ding/entry/serial_entry_mbrl.html">ding.entry.serial_entry_mbrl</a></li>
 <li><a href="ding/envs/env/base_env.html">ding.envs.env.base_env</a></li>
 <li><a href="ding/envs/env_manager/base_env_manager.html">ding.envs.env_manager.base_env_manager</a></li>
 <li><a href="ding/envs/env_manager/subprocess_env_manager.html">ding.envs.env_manager.subprocess_env_manager</a></li>
 <li><a href="ding/envs/env_wrappers/env_wrappers.html">ding.envs.env_wrappers.env_wrappers</a></li>
+<li><a href="ding/framework/context.html">ding.framework.context</a></li>
+<li><a href="ding/framework/parallel.html">ding.framework.parallel</a></li>
+<li><a href="ding/framework/task.html">ding.framework.task</a></li>
 <li><a href="ding/interaction/base/common.html">ding.interaction.base.common</a></li>
 <li><a href="ding/interaction/base/threading.html">ding.interaction.base.threading</a></li>
 <li><a href="ding/interaction/exception/base.html">ding.interaction.exception.base</a></li>
@@ -185,17 +191,23 @@
 <li><a href="ding/model/common/head.html">ding.model.common.head</a></li>
 <li><a href="ding/model/common/utils.html">ding.model.common.utils</a></li>
 <li><a href="ding/model/template/coma.html">ding.model.template.coma</a></li>
+<li><a href="ding/model/template/ppg.html">ding.model.template.ppg</a></li>
 <li><a href="ding/model/template/q_learning.html">ding.model.template.q_learning</a></li>
 <li><a href="ding/model/template/qac.html">ding.model.template.qac</a></li>
+<li><a href="ding/model/template/qac_dist.html">ding.model.template.qac_dist</a></li>
 <li><a href="ding/model/template/qmix.html">ding.model.template.qmix</a></li>
 <li><a href="ding/model/template/vac.html">ding.model.template.vac</a></li>
+<li><a href="ding/model/template/wqmix.html">ding.model.template.wqmix</a></li>
 <li><a href="ding/policy/a2c.html">ding.policy.a2c</a></li>
 <li><a href="ding/policy/acer.html">ding.policy.acer</a></li>
 <li><a href="ding/policy/atoc.html">ding.policy.atoc</a></li>
 <li><a href="ding/policy/c51.html">ding.policy.c51</a></li>
 <li><a href="ding/policy/collaq.html">ding.policy.collaq</a></li>
 <li><a href="ding/policy/coma.html">ding.policy.coma</a></li>
+<li><a href="ding/policy/cql.html">ding.policy.cql</a></li>
+<li><a href="ding/policy/d4pg.html">ding.policy.d4pg</a></li>
 <li><a href="ding/policy/ddpg.html">ding.policy.ddpg</a></li>
+<li><a href="ding/policy/dqfd.html">ding.policy.dqfd</a></li>
 <li><a href="ding/policy/dqn.html">ding.policy.dqn</a></li>
 <li><a href="ding/policy/impala.html">ding.policy.impala</a></li>
 <li><a href="ding/policy/iqn.html">ding.policy.iqn</a></li>
@@ -204,22 +216,35 @@
 <li><a href="ding/policy/qmix.html">ding.policy.qmix</a></li>
 <li><a href="ding/policy/qrdqn.html">ding.policy.qrdqn</a></li>
 <li><a href="ding/policy/r2d2.html">ding.policy.r2d2</a></li>
+<li><a href="ding/policy/r2d2_gtrxl.html">ding.policy.r2d2_gtrxl</a></li>
+<li><a href="ding/policy/r2d3.html">ding.policy.r2d3</a></li>
 <li><a href="ding/policy/rainbow.html">ding.policy.rainbow</a></li>
 <li><a href="ding/policy/sac.html">ding.policy.sac</a></li>
 <li><a href="ding/policy/sql.html">ding.policy.sql</a></li>
 <li><a href="ding/policy/td3.html">ding.policy.td3</a></li>
+<li><a href="ding/policy/td3_bc.html">ding.policy.td3_bc</a></li>
+<li><a href="ding/policy/wqmix.html">ding.policy.wqmix</a></li>
 <li><a href="ding/reward_model/base_reward_model.html">ding.reward_model.base_reward_model</a></li>
+<li><a href="ding/reward_model/gail_irl_model.html">ding.reward_model.gail_irl_model</a></li>
+<li><a href="ding/reward_model/guided_cost_reward_model.html">ding.reward_model.guided_cost_reward_model</a></li>
+<li><a href="ding/reward_model/her_reward_model.html">ding.reward_model.her_reward_model</a></li>
+<li><a href="ding/reward_model/icm_reward_model.html">ding.reward_model.icm_reward_model</a></li>
 <li><a href="ding/reward_model/pdeil_irl_model.html">ding.reward_model.pdeil_irl_model</a></li>
 <li><a href="ding/reward_model/pwil_irl_model.html">ding.reward_model.pwil_irl_model</a></li>
 <li><a href="ding/reward_model/red_irl_model.html">ding.reward_model.red_irl_model</a></li>
+<li><a href="ding/reward_model/rnd_reward_model.html">ding.reward_model.rnd_reward_model</a></li>
+<li><a href="ding/reward_model/trex_reward_model.html">ding.reward_model.trex_reward_model</a></li>
 <li><a href="ding/rl_utils/adder.html">ding.rl_utils.adder</a></li>
 <li><a href="ding/rl_utils/exploration.html">ding.rl_utils.exploration</a></li>
+<li><a href="ding/rl_utils/ppo.html">ding.rl_utils.ppo</a></li>
+<li><a href="ding/rl_utils/td.html">ding.rl_utils.td</a></li>
 <li><a href="ding/torch_utils/checkpoint_helper.html">ding.torch_utils.checkpoint_helper</a></li>
 <li><a href="ding/torch_utils/data_helper.html">ding.torch_utils.data_helper</a></li>
 <li><a href="ding/torch_utils/distribution.html">ding.torch_utils.distribution</a></li>
 <li><a href="ding/torch_utils/loss/cross_entropy_loss.html">ding.torch_utils.loss.cross_entropy_loss</a></li>
 <li><a href="ding/torch_utils/loss/multi_logits_loss.html">ding.torch_utils.loss.multi_logits_loss</a></li>
 <li><a href="ding/torch_utils/network/activation.html">ding.torch_utils.network.activation</a></li>
+<li><a href="ding/torch_utils/network/gtrxl.html">ding.torch_utils.network.gtrxl</a></li>
 <li><a href="ding/torch_utils/network/nn_module.html">ding.torch_utils.network.nn_module</a></li>
 <li><a href="ding/torch_utils/network/res_block.html">ding.torch_utils.network.res_block</a></li>
 <li><a href="ding/torch_utils/network/rnn.html">ding.torch_utils.network.rnn</a></li>
@@ -236,11 +261,16 @@
 <li><a href="ding/utils/system_helper.html">ding.utils.system_helper</a></li>
 <li><a href="ding/utils/time_helper.html">ding.utils.time_helper</a></li>
 <li><a href="ding/utils/time_helper_base.html">ding.utils.time_helper_base</a></li>
+<li><a href="ding/worker/buffer/buffer.html">ding.worker.buffer.buffer</a></li>
+<li><a href="ding/worker/buffer/deque_buffer.html">ding.worker.buffer.deque_buffer</a></li>
+<li><a href="ding/worker/buffer/deque_buffer_wrapper.html">ding.worker.buffer.deque_buffer_wrapper</a></li>
 <li><a href="ding/worker/collector/base_serial_collector.html">ding.worker.collector.base_serial_collector</a></li>
 <li><a href="ding/worker/collector/base_serial_evaluator.html">ding.worker.collector.base_serial_evaluator</a></li>
 <li><a href="ding/worker/collector/comm/base_comm_collector.html">ding.worker.collector.comm.base_comm_collector</a></li>
 <li><a href="ding/worker/collector/comm/flask_fs_collector.html">ding.worker.collector.comm.flask_fs_collector</a></li>
 <li><a href="ding/worker/collector/comm/utils.html">ding.worker.collector.comm.utils</a></li>
+<li><a href="ding/worker/collector/episode_serial_collector.html">ding.worker.collector.episode_serial_collector</a></li>
+<li><a href="ding/worker/collector/sample_serial_collector.html">ding.worker.collector.sample_serial_collector</a></li>
 <li><a href="ding/worker/coordinator/base_parallel_commander.html">ding.worker.coordinator.base_parallel_commander</a></li>
 <li><a href="ding/worker/coordinator/base_serial_commander.html">ding.worker.coordinator.base_serial_commander</a></li>
 <li><a href="ding/worker/coordinator/comm_coordinator.html">ding.worker.coordinator.comm_coordinator</a></li>

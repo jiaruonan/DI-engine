@@ -90,8 +90,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../quick_start/index.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../key_concept/index.html">Key Concept</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../intro_rl/index.html">Introduction to RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../env_tutorial/index.html">RL Environment Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../hands_on/index.html">Hands on RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hands_on/index.html">RL Algorithm Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../env_tutorial/index.html">RL Environments Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../distributed/index.html">Distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../best_practice/index.html">Best Practice</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Doc</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../config/index.html">Config</a></li>
@@ -114,17 +115,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../model/index.html">Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reward_model/index.html">Reward Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../league/index.html">League</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html">Framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../worker/learner/index.html">Learner</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../worker/collector/index.html">Collector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../worker/replay_buffer/index.html">Buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../worker/replay_buffer/index.html">Replay Buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../worker/coordinator/index.html">Coordinator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../worker/buffer/index.html">Buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rl_utils/index.html">RL Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../torch_utils/index.html">Torch Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/index.html">Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../interaction/index.html">Interaction</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../faq/index_en.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../feature/index.html">Feature</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
@@ -132,6 +135,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../guide/index.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial_dev/index.html">Tutorial-Developer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../architecture/index.html">Architecture Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../specification/index.html">Middleware code specification</a></li>
 </ul>
 
             
@@ -223,7 +227,7 @@
 <col style="width: 8%" />
 <col style="width: 13%" />
 <col style="width: 33%" />
-<col style="width: 23%" />
+<col style="width: 24%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>ID</p></th>
@@ -236,7 +240,11 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>1</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type</span></code></div>
+<div class="line"><br /></div>
+</div>
+</td>
 <td><p>str</p></td>
 <td><p>ddpg</p></td>
 <td><div class="line-block">
@@ -251,9 +259,12 @@
 </td>
 </tr>
 <tr class="row-odd"><td><p>2</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">cuda</span></code></p></td>
+<td><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cuda</span></code></div>
+</div>
+</td>
 <td><p>bool</p></td>
-<td><p>True</p></td>
+<td><p>False</p></td>
 <td><div class="line-block">
 <div class="line">Whether to use cuda for network</div>
 </div>
@@ -439,7 +450,7 @@
 </td>
 <td><div class="line-block">
 <div class="line">aka. Interpolation</div>
-<div class="line">factor in polyak aver</div>
+<div class="line">factor in polyak aver-</div>
 <div class="line">aging for target</div>
 <div class="line">networks.</div>
 </div>
@@ -465,10 +476,10 @@
 </div>
 </td>
 <td><div class="line-block">
-<div class="line">Sample noise from dis</div>
+<div class="line">Sample noise from dis-</div>
 <div class="line">tribution, Ornstein-</div>
 <div class="line">Uhlenbeck process in</div>
-<div class="line">DDPG paper, Guassian</div>
+<div class="line">DDPG paper, Gaussian</div>
 <div class="line">process in ours.</div>
 </div>
 </td>

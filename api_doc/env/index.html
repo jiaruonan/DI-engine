@@ -90,8 +90,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../quick_start/index.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../key_concept/index.html">Key Concept</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../intro_rl/index.html">Introduction to RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../env_tutorial/index.html">RL Environment Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../hands_on/index.html">Hands on RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hands_on/index.html">RL Algorithm Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../env_tutorial/index.html">RL Environments Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../distributed/index.html">Distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../best_practice/index.html">Best Practice</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Doc</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../config/index.html">Config</a></li>
@@ -105,17 +106,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../model/index.html">Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reward_model/index.html">Reward Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../league/index.html">League</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../framework/index.html">Framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../worker/learner/index.html">Learner</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../worker/collector/index.html">Collector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../worker/replay_buffer/index.html">Buffer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../worker/replay_buffer/index.html">Replay Buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../worker/coordinator/index.html">Coordinator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../worker/buffer/index.html">Buffer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rl_utils/index.html">RL Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../torch_utils/index.html">Torch Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/index.html">Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../interaction/index.html">Interaction</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../faq/index_en.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../feature/index.html">Feature</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
@@ -123,6 +126,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../guide/index.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial_dev/index.html">Tutorial-Developer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../architecture/index.html">Architecture Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../specification/index.html">Middleware code specification</a></li>
 </ul>
 
             
@@ -204,20 +208,19 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="env_wrappers.html">envs.env_wrappers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="env_wrappers.html#env-env-wrappers">env.env_wrappers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#noopresetenv">NoopResetEnv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#maxandskipenv">MaxAndSkipEnv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#warpframe">WarpFrame</a></li>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#scaledfloatframe">ScaledFloatFrame</a></li>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#cliprewardenv">ClipRewardEnv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#framestack">FrameStack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#noopresetwrapper">NoopResetWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#maxandskipwrapper">MaxAndSkipWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#warpframewrapper">WarpFrameWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#scaledfloatframewrapper">ScaledFloatFrameWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#cliprewardwrapper">ClipRewardWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#framestackwrapper">FrameStackWrapper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#obstransposewrapper">ObsTransposeWrapper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#runningmeanstd">RunningMeanStd</a></li>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#obsnormenv">ObsNormEnv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#rewardnormenv">RewardNormEnv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#obsnormwrapper">ObsNormWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#rewardnormwrapper">RewardNormWrapper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#ramwrapper">RamWrapper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#episodiclifeenv">EpisodicLifeEnv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#fireresetenv">FireResetEnv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#module-ding.envs.env_wrappers.update_shape">update_shape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#episodiclifewrapper">EpisodicLifeWrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="env_wrappers.html#fireresetwrapper">FireResetWrapper</a></li>
 </ul>
 </li>
 </ul>

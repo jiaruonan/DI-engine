@@ -88,11 +88,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../quick_start/index.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../key_concept/index.html">Key Concept</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../intro_rl/index.html">Introduction to RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../env_tutorial/index.html">RL Environment Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../hands_on/index.html">Hands on RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hands_on/index.html">RL Algorithm Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../env_tutorial/index.html">RL Environments Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../distributed/index.html">Distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../best_practice/index.html">Best Practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api_doc/index.html">API Doc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../faq/index_en.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq/index.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../feature/index.html">Feature</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
@@ -100,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../guide/index.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial_dev/index.html">Tutorial-Developer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../architecture/index.html">Architecture Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../specification/index.html">Middleware code specification</a></li>
 </ul>
 
             
@@ -246,7 +248,7 @@
         <span class="p">),</span>
         <span class="n">collect</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
             <span class="c1"># (int) Only one of [n_sample, n_episode] shoule be set</span>
-            <span class="n">n_episode</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+            <span class="c1"># n_episode=32,</span>
             <span class="c1"># (int) Cut trajectories into pieces with length &quot;unroll_len&quot;, the length of timesteps</span>
             <span class="c1"># in each forward when training. In qmix, it is greater than 1 because there is RNN.</span>
             <span class="n">unroll_len</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -434,6 +436,7 @@
 <span class="sd">            Load the state_dict variable into policy learn mode.</span>
 <span class="sd">        Arguments:</span>
 <span class="sd">            - state_dict (:obj:`Dict[str, Any]`): the dict of policy learn state saved before.</span>
+
 <span class="sd">        .. tip::</span>
 <span class="sd">            If you want to only load some parts of model, you can simply set the ``strict`` argument in \</span>
 <span class="sd">            load_state_dict to ``False``, or refer to ``ding.torch_utils.checkpoint_helper`` for more \</span>
@@ -589,6 +592,7 @@
 <span class="sd">            Return this algorithm default model setting for demonstration.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            - model_info (:obj:`Tuple[str, List[str]]`): model name and mode import_names</span>
+
 <span class="sd">        .. note::</span>
 <span class="sd">            The user can define and use customized network model but must obey the same inferface definition indicated \</span>
 <span class="sd">            by import_names path. For collaq, ``ding.model.qmix.qmix``</span>

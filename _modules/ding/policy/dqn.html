@@ -88,11 +88,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../quick_start/index.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../key_concept/index.html">Key Concept</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../intro_rl/index.html">Introduction to RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../env_tutorial/index.html">RL Environment Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../hands_on/index.html">Hands on RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hands_on/index.html">RL Algorithm Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../env_tutorial/index.html">RL Environments Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../distributed/index.html">Distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../best_practice/index.html">Best Practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api_doc/index.html">API Doc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../faq/index_en.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq/index.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../feature/index.html">Feature</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
@@ -100,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../guide/index.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tutorial_dev/index.html">Tutorial-Developer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../architecture/index.html">Architecture Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../specification/index.html">Middleware code specification</a></li>
 </ul>
 
             
@@ -177,7 +179,7 @@
 <span class="kn">from</span> <span class="nn">.common_utils</span> <span class="kn">import</span> <span class="n">default_preprocess_learn</span>
 
 
-<div class="viewcode-block" id="DQNPolicy"><a class="viewcode-back" href="../../../hands_on/dqn.html#ding.policy.dqn.DQNPolicy">[docs]</a><span class="nd">@POLICY_REGISTRY</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;dqn&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="DQNPolicy"><a class="viewcode-back" href="../../../hands_on/dqn_zh.html#ding.policy.dqn.DQNPolicy">[docs]</a><span class="nd">@POLICY_REGISTRY</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;dqn&#39;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">DQNPolicy</span><span class="p">(</span><span class="n">Policy</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Overview:</span>
@@ -205,29 +207,48 @@
 <span class="sd">        8  | ``learn.update``   int      3              | How many updates(iterations) to train  | This args can be vary</span>
 <span class="sd">           | ``per_collect``                            | after collector&#39;s one collection. Only | from envs. Bigger val</span>
 <span class="sd">                                                        | valid in serial training               | means more off-policy</span>
-<span class="sd">        9  | ``learn.batch_``   int      64             | The number of samples of an iteration</span>
+<span class="sd">        9  | ``learn.multi``    bool     False          | whether to use multi gpu during</span>
+<span class="sd">           | ``_gpu``</span>
+<span class="sd">        10 | ``learn.batch_``   int      64             | The number of samples of an iteration</span>
 <span class="sd">           | ``size``</span>
-<span class="sd">        10 | ``learn.learning`` float    0.001          | Gradient step length of an iteration.</span>
+<span class="sd">        11 | ``learn.learning`` float    0.001          | Gradient step length of an iteration.</span>
 <span class="sd">           | ``_rate``</span>
-<span class="sd">        11 | ``learn.target_``  int      100            | Frequence of target network update.    | Hard(assign) update</span>
+<span class="sd">        12 | ``learn.target_``  int      100            | Frequence of target network update.    | Hard(assign) update</span>
 <span class="sd">           | ``update_freq``</span>
-<span class="sd">        12 | ``learn.ignore_``  bool     False          | Whether ignore done for target value   | Enable it for some</span>
+<span class="sd">        13 | ``learn.ignore_``  bool     False          | Whether ignore done for target value   | Enable it for some</span>
 <span class="sd">           | ``done``                                   | calculation.                           | fake termination env</span>
-<span class="sd">        13 ``collect.n_sample`` int      [8, 128]       | The number of training samples of a    | It varies from</span>
+<span class="sd">        14 ``collect.n_sample`` int      [8, 128]       | The number of training samples of a    | It varies from</span>
 <span class="sd">                                                        | call of collector.                     | different envs</span>
-<span class="sd">        14 | ``collect.unroll`` int      1              | unroll length of an iteration          | In RNN, unroll_len&gt;1</span>
+<span class="sd">        15 | ``collect.unroll`` int      1              | unroll length of an iteration          | In RNN, unroll_len&gt;1</span>
 <span class="sd">           | ``_len``</span>
+<span class="sd">        16 | ``other.eps.type`` str      exp            | exploration rate decay type            | Support [&#39;exp&#39;,</span>
+<span class="sd">                                                                                                 | &#39;linear&#39;].</span>
+<span class="sd">        17 | ``other.eps.``     float    0.95           | start value of exploration rate        | [0,1]</span>
+<span class="sd">           | ``start``</span>
+<span class="sd">        18 | ``other.eps.``     float    0.1            | end value of exploration rate          | [0,1]</span>
+<span class="sd">           | ``end``</span>
+<span class="sd">        19 | ``other.eps.``     int      10000          | decay length of exploration            | greater than 0. set</span>
+<span class="sd">           | ``decay``                                                                           | decay=10000 means</span>
+<span class="sd">                                                                                                 | the exploration rate</span>
+<span class="sd">                                                                                                 | decay from start</span>
+<span class="sd">                                                                                                 | value to end value</span>
+<span class="sd">                                                                                                 | during decay length.</span>
 <span class="sd">        == ==================== ======== ============== ======================================== =======================</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
         <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;dqn&#39;</span><span class="p">,</span>
+        <span class="c1"># (bool) Whether use cuda in policy</span>
         <span class="n">cuda</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="c1"># (bool) Whether learning policy is the same as collecting data policy(on-policy)</span>
         <span class="n">on_policy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="c1"># (bool) Whether enable priority experience sample</span>
         <span class="n">priority</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="c1"># (bool) Whether use Importance Sampling Weight to correct biased update. If True, priority must be True.</span>
         <span class="n">priority_IS_weight</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="c1"># (float) Discount factor(gamma) for returns</span>
         <span class="n">discount_factor</span><span class="o">=</span><span class="mf">0.97</span><span class="p">,</span>
+        <span class="c1"># (int) The number of step for calculating target q_value</span>
         <span class="n">nstep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">learn</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
             <span class="c1"># (bool) Whether to use multi gpu</span>
@@ -236,7 +257,9 @@
             <span class="c1"># Bigger &quot;update_per_collect&quot; means bigger off-policy.</span>
             <span class="c1"># collect data -&gt; update policy-&gt; collect data -&gt; ...</span>
             <span class="n">update_per_collect</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="c1"># (int) How many samples in a training batch</span>
             <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+            <span class="c1"># (float) The step size of gradient descent</span>
             <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
             <span class="c1"># ==============================================================</span>
             <span class="c1"># The following configs are algorithm-specific</span>
@@ -260,7 +283,9 @@
             <span class="n">eps</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
                 <span class="c1"># (str) Decay type. Support [&#39;exp&#39;, &#39;linear&#39;].</span>
                 <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;exp&#39;</span><span class="p">,</span>
+                <span class="c1"># (float) Epsilon start value</span>
                 <span class="n">start</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+                <span class="c1"># (float) Epsilon end value</span>
                 <span class="n">end</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                 <span class="c1"># (int) Decay length(env step)</span>
                 <span class="n">decay</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
