@@ -187,6 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../01_quickstart/index.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../02_algo/index.html">RL Algorithm Taxonomy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../03_system/index.html">System Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../04_best_practice/index.html">Best Practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../05_api_doc/index.html">API Doc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../06_faq/index.html">FAQ</a></li>
 </ul>
@@ -376,11 +377,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_env_replay_path</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="c1"># env_ref is used to acquire some common attributes of env, like obs_shape and act_shape</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env_fn</span><span class="p">[</span><span class="mi">0</span><span class="p">]()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_observation_space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">observation_space</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_action_space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">action_space</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_reward_space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">reward_space</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_observation_space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">observation_space</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_action_space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">action_space</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_reward_space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">reward_space</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c1"># For some environment,</span>
+            <span class="c1"># we have to reset before getting observation description.</span>
+            <span class="c1"># However, for dmc-mujoco, we should not reset the env at the main thread,</span>
+            <span class="c1"># when using in a subprocess mode, which would cause opengl rendering bugs,</span>
+            <span class="c1"># leading to no response subprocesses.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_observation_space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">observation_space</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_action_space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">action_space</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_reward_space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">reward_space</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_env_ref</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_env_states</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">EnvState</span><span class="o">.</span><span class="n">VOID</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_env_num</span><span class="p">)}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_env_seed</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_env_num</span><span class="p">)}</span>
 
@@ -650,7 +661,11 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_env_seed</span><span class="p">[</span><span class="n">env_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;invalid seed arguments type: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">seed</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_env_dynamic_seed</span> <span class="o">=</span> <span class="n">dynamic_seed</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_env_dynamic_seed</span> <span class="o">=</span> <span class="n">dynamic_seed</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_action_space</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># TODO(nyz) deal with nested action_space like SMAC</span>
+            <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="BaseEnvManager.enable_save_replay"><a class="viewcode-back" href="../../../../05_api_doc/env/env_manager.html#ding.envs.env_manager.base_env_manager.BaseEnvManager.enable_save_replay">[docs]</a>    <span class="k">def</span> <span class="nf">enable_save_replay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">replay_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
