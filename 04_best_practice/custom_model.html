@@ -13,7 +13,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>如何自定义神经网络模型（model） &mdash; DI-engine 0.1.0 documentation</title>
+  <title>How to customize the neural network model &mdash; DI-engine 0.1.0 documentation</title>
   
 
   <link rel="shortcut icon" href="../_static/images/favicon.ico" />
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="../_static/css/style.css" type="text/css" />
   <link rel="index" title="Index" href="../genindex.html" />
   <link rel="search" title="Search" href="../search.html" />
-  <link rel="next" title="为什么需要 Env Wrapper" href="env_wrapper_zh.html" />
-  <link rel="prev" title="如何将自己的环境迁移到DI-engine中" href="ding_env_zh.html" />
+  <link rel="next" title="API Doc" href="../05_api_doc/index.html" />
+  <link rel="prev" title="How to migrate your own environment to DI-engine" href="ding_env.html" />
     <link href="../_static/css/style.css" rel="stylesheet" type="text/css">
 
 
@@ -204,30 +204,30 @@
         
         
         
-        <p class="caption" role="heading"><span class="caption-text">用户指南</span></p>
+        <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../00_intro/index_zh.html">DI-engine 简介</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_quickstart/index_zh.html">快速开始</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_algo/index_zh.html">强化学习算法分类</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_system/index_zh.html">系统设计</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index_zh.html">最佳实践</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_intro/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_quickstart/index.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_algo/index.html">RL Algorithm Taxonomy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_system/index.html">System Design</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Best Practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05_api_doc/index.html">API Doc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_faq/index_zh.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_faq/index.html">FAQ</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">强化学习教程</span></p>
+<p class="caption" role="heading"><span class="caption-text">Reinforcement Learning Tutorial</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../10_concepts/index_zh.html">强化学习基础概念介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11_dizoo/index_zh.html">从 DI-zoo 开始学习</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12_policies/index_zh.html">强化学习算法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13_envs/index_zh.html">强化学习环境示例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_concepts/index.html">Introduction to RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_dizoo/index.html">Learn From DI-zoo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_policies/index.html">RL Algorithms Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_envs/index.html">RL Env Examples</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">开发者规范</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developer Specification</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../20_spec/index_zh.html">代码规范</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../21_code_style/index_zh.html">代码风格指南</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../22_test/index_zh.html">单元测试指南</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../23_visual/index_zh.html">图像与可视化</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../24_cooperation/index_zh.html">Github 合作模式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20_spec/index.html">Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21_code_style/index.html">Code Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22_test/index.html">Unit Test Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23_visual/index.html">Diagrams and Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24_cooperation/index.html">Github Cooperation</a></li>
 </ul>
 
         
@@ -260,21 +260,21 @@
   <ul class="pytorch-breadcrumbs">
     
       <li>
-        <a href="../index_zh.html">
+        <a href="../index.html">
             Docs
         </a> &gt;
       </li>
 
         
-          <li><a href="index_zh.html">最佳实践</a> &gt;</li>
+          <li><a href="index.html">Best Practice</a> &gt;</li>
         
-      <li>如何自定义神经网络模型（model）</li>
+      <li>How to customize the neural network model</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
         
             
-            <a href="../_sources/04_best_practice/custom_model_zh.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
+            <a href="../_sources/04_best_practice/custom_model.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
           
         
       </li>
@@ -298,13 +298,13 @@
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
               <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
                 
-  <section id="model">
-<h1>如何自定义神经网络模型（model）<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h1>
-<p>在强化学习中，我们需要根据决策问题类型和使用的策略（Policy）来选择相应的神经网络。而在 DI-engine 中，Policy 使用的神经网络可以通过配置文件中的 <code class="docutils literal notranslate"><span class="pre">cfg.policy.model</span></code> 来自动生成，
-也可由用户自定义实例化相应的神经网络，作为参数传入 Policy 中。而在接下来的部分，我们将会详细展开每种使用方式具体的接口和原理。</p>
-<section id="policy">
-<h2>Policy 默认使用的模型是什么<a class="headerlink" href="#policy" title="Permalink to this headline">¶</a></h2>
-<p>DI-engine 中已经实现的 policy，默认使用 <code class="docutils literal notranslate"><span class="pre">default_model</span></code> 方法中表明的神经网络模型，例如在 SACPolicy 中：</p>
+  <section id="how-to-customize-the-neural-network-model">
+<h1>How to customize the neural network model<a class="headerlink" href="#how-to-customize-the-neural-network-model" title="Permalink to this headline">¶</a></h1>
+<p>In using reinforcement learning methods, one would have to choose an appropriate neural networks depending on the nature of the decision problem and the policy that is used. In the context of the DI-engine framework, a user can do so in 2 primary ways. The first way involves a user making use of the configuration file <code class="docutils literal notranslate"><span class="pre">cfg.policy.model</span></code> to automatically generate the desired neural network. The second way gives the user more control by allowing the desired neural network (instantiated as an object) to be passed direcly into the policy.</p>
+<p>The purpose of this guide is to explain the details with regards to these 2 primary ways of choosing the appropriate neural network and as well as the principles behind them.</p>
+<section id="default-model-used-in-a-policy">
+<h2>Default model used in a policy<a class="headerlink" href="#default-model-used-in-a-policy" title="Permalink to this headline">¶</a></h2>
+<p>For a policy implemented in DI-engine, the <code class="docutils literal notranslate"><span class="pre">default_model</span></code> method contains the details of the default neural network model that was implemented. Take for example the SACPolicy implementation:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@POLICY_REGISTRY</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;sac&#39;</span><span class="p">)</span>
  <span class="k">class</span> <span class="nc">SACPolicy</span><span class="p">(</span><span class="n">Policy</span><span class="p">):</span>
  <span class="o">...</span>
@@ -317,30 +317,26 @@
  <span class="o">...</span>
 </pre></div>
 </div>
-<p>此处return的 <code class="docutils literal notranslate"><span class="pre">'maqac_continuous',</span> <span class="pre">['ding.model.template.maqac']</span></code>，前者是模型在注册器中注册的名字，后者是模型所处的文件路径。</p>
-<p>在使用配置文件时，DI-engine 封装好的入口文件将会把 <code class="docutils literal notranslate"><span class="pre">cfg.policy.model</span></code> 中的参数，逐个传给默认注册好的模型类（例如把 <code class="docutils literal notranslate"><span class="pre">obs_shape</span></code>, <code class="docutils literal notranslate"><span class="pre">action_shape</span></code> 等参数传给
-<a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/model/template/qac.py#L13">QAC</a> ），模型类中根据传入参数自动生成所需的神经网络（例如为向量输入使用全连接层（FC）而为图像输入使用卷积（Conv））。</p>
+<p>Observe here that the method either returns <code class="docutils literal notranslate"><span class="pre">'maqac_continuous',</span> <span class="pre">['ding.model.template.maqac']</span></code> or <code class="docutils literal notranslate"><span class="pre">'qac',</span> <span class="pre">['ding.model.template.qac']</span></code>. In both cases, the first item in the return tuple is the name registered with DI-engine’s model registry mechanism. The second item gives an indication of the file path of where the model file is located.</p>
+<p>When using the configuration file <code class="docutils literal notranslate"><span class="pre">cfg.policy.model</span></code>, DI-engine will correspondingly pass each argument into the model registered with DI-engine’s registry mechanism. (For example, argument <code class="docutils literal notranslate"><span class="pre">obs_shape</span></code>, <code class="docutils literal notranslate"><span class="pre">action_shape</span></code> etc will be passed into <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/model/template/qac.py#L13">QAC</a> ). The required neural network is then automatically generated in the model class based on the incoming arguments (e.g. a fully connected layer (FC) for vector input and a convolution (Conv) for image input).</p>
 </section>
 <section id="id1">
-<h2>如何自定义神经网络模型<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>但很多时候 DI-engine 中实现的 <code class="docutils literal notranslate"><span class="pre">policy</span></code>中的  <code class="docutils literal notranslate"><span class="pre">default_model</span></code>不适用自己的任务，例如这里想要在 <code class="docutils literal notranslate"><span class="pre">dmc2gym</span></code>环境 <code class="docutils literal notranslate"><span class="pre">cartpole-swingup</span></code> 任务下应用 <code class="docutils literal notranslate"><span class="pre">sac</span></code>算法，且环境 observation 为  <code class="docutils literal notranslate"><span class="pre">pixel</span></code>，
-即 <code class="docutils literal notranslate"><span class="pre">obs_shape</span> <span class="pre">=</span> <span class="pre">(3,</span> <span class="pre">height,</span> <span class="pre">width)</span></code>（如果设置 <code class="docutils literal notranslate"><span class="pre">from_pixel</span> <span class="pre">=</span> <span class="pre">True,</span> <span class="pre">channels_first</span> <span class="pre">=</span> <span class="pre">True</span></code>，详情见  <a class="reference external" href="https://github.com/opendilab/DI-engine-docs/blob/main/source/13_envs/dmc2gym_zh.rst">dmc2gym 环境文档</a>）</p>
-<p>而此时查阅 <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/policy/sac.py">sac 源码</a>可知 <code class="docutils literal notranslate"><span class="pre">default_model</span></code>为 <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/model/template/qac.py">qac</a>，
-<code class="docutils literal notranslate"><span class="pre">qac</span> <span class="pre">model</span></code>中暂时只支持 <code class="docutils literal notranslate"><span class="pre">obs_shape</span></code>为一维的情况，此时我们即可根据需求自定义 model 并应用到 policy。</p>
+<h2>How to customize the neural network model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>It is often the case that the <code class="docutils literal notranslate"><span class="pre">default_model</span></code>chosen in a DI-engine <code class="docutils literal notranslate"><span class="pre">policy</span></code> is not suitable for one’s task at hand. Take for example the use of <code class="docutils literal notranslate"><span class="pre">sac</span></code> on the <code class="docutils literal notranslate"><span class="pre">cartpole-swingup</span></code> task of <code class="docutils literal notranslate"><span class="pre">dmc2gym</span></code> (a wrapper for the Deep Mind Control Suite). Note the default values for observation is  <code class="docutils literal notranslate"><span class="pre">pixel</span></code>, while <code class="docutils literal notranslate"><span class="pre">obs_shape</span> <span class="pre">=</span> <span class="pre">(3,</span> <span class="pre">height,</span> <span class="pre">width)</span></code> (For setting <code class="docutils literal notranslate"><span class="pre">from_pixel</span> <span class="pre">=</span> <span class="pre">True,</span> <span class="pre">channels_first</span> <span class="pre">=</span> <span class="pre">True</span></code>, see <a class="reference external" href="https://github.com/opendilab/DI-engine-docs/blob/main/source/13_envs/dmc2gym_zh.rst">dmc2gym</a> documentation for details)</p>
+<p>If one were to look at the source code of <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/policy/sac.py">sac</a>, it can be seen that the <code class="docutils literal notranslate"><span class="pre">default_model</span></code> is actually <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/model/template/qac.py">qac</a>. The <code class="docutils literal notranslate"><span class="pre">qac</span> <span class="pre">model</span></code> currently only supports an <code class="docutils literal notranslate"><span class="pre">obs_shape</span></code> of one dimensoin (e.g. (4, )). Hence, it becomes apparent that one must customize a model according to one’s needs and ensure that the policy is setup accordingly.</p>
 </section>
-<section id="id2">
-<h2>自定义 model 基本步骤<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<section id="env-policy">
-<h3>1. 明确 env, policy<a class="headerlink" href="#env-policy" title="Permalink to this headline">¶</a></h3>
+<section id="step-by-step-guide-to-customizing-a-model">
+<h2>Step-by-step guide to customizing a model<a class="headerlink" href="#step-by-step-guide-to-customizing-a-model" title="Permalink to this headline">¶</a></h2>
+<section id="choose-your-environment-and-policy">
+<h3>1. Choose your environment and policy<a class="headerlink" href="#choose-your-environment-and-policy" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>比如这里选定 <code class="docutils literal notranslate"><span class="pre">dmc2gym</span></code>环境 <code class="docutils literal notranslate"><span class="pre">cartpole-swingup</span></code> 任务，且设置 <code class="docutils literal notranslate"><span class="pre">from_pixel</span> <span class="pre">=</span> <span class="pre">True,</span> <span class="pre">channels_first</span> <span class="pre">=</span> <span class="pre">True</span></code>（详情见  <a class="reference external" href="https://github.com/opendilab/DI-engine-docs/blob/main/source/13_envs/dmc2gym_zh.rst">dmc2gym 环境文档</a>）
-，即此时观察空间为图像 <code class="docutils literal notranslate"><span class="pre">obs_shape</span> <span class="pre">=</span> <span class="pre">(3,</span> <span class="pre">height,</span> <span class="pre">width)</span></code>，并选择 <code class="docutils literal notranslate"><span class="pre">sac</span></code>算法进行学习。</p></li>
+<li><p>For the purpose of this guide, let the choice of environment and policy to be the use of <code class="docutils literal notranslate"><span class="pre">sac</span></code> on the <code class="docutils literal notranslate"><span class="pre">cartpole-swingup</span></code> task of <code class="docutils literal notranslate"><span class="pre">dmc2gym</span></code> (a wrapper for the Deep Mind Control Suite). (For details, see <a class="reference external" href="https://github.com/opendilab/DI-engine-docs/blob/main/source/13_envs/dmc2gym_zh.rst">dmc2gym</a> documentation)</p></li>
 </ul>
 </section>
-<section id="policy-default-model">
-<h3>2. 查阅 policy 中的 default_model 是否适用<a class="headerlink" href="#policy-default-model" title="Permalink to this headline">¶</a></h3>
+<section id="check-to-see-if-the-policy-s-default-model-is-suitable">
+<h3>2. Check to see if the policy’s default_model is suitable<a class="headerlink" href="#check-to-see-if-the-policy-s-default-model-is-suitable" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>此时根据<a class="reference external" href="https://xxx">policy-default_model 链接</a>或者直接查阅源码 <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/policy/sac.py">ding/policy/sac:SACPolicy</a>，找到 SAC 的  <code class="docutils literal notranslate"><span class="pre">default_model</span></code>：</p></li>
+<li><p>This can be done in 1 of 2 ways. One either look up the documentation at <a class="reference external" href="https://xxx">policy-default_model</a> or read the source code of <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/policy/sac.py">ding/policy/sac:SACPolicy</a> and find out what is being used in the <code class="docutils literal notranslate"><span class="pre">default_model</span></code> method.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@POLICY_REGISTRY</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;sac&#39;</span><span class="p">)</span>
  <span class="k">class</span> <span class="nc">SACPolicy</span><span class="p">(</span><span class="n">Policy</span><span class="p">):</span>
@@ -355,21 +351,20 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>进一步查看  <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/69db77e2e54a0fba95d83c9411c6b11cd25beae9/ding/model/template/qac.py#L40">ding/model/template/qac:QAC</a>，
-发现 DI-engine 中实现的 <code class="docutils literal notranslate"><span class="pre">qac</span> <span class="pre">model</span></code>暂时只支持 <code class="docutils literal notranslate"><span class="pre">obs_shape</span></code>为一维的情况，但是此时环境的观察空间为图像 <code class="docutils literal notranslate"><span class="pre">obs_shape</span> <span class="pre">=</span> <span class="pre">(3,</span> <span class="pre">height,</span> <span class="pre">width)</span></code>，
-因此我们需要根据需求自定义 model 并应用到 policy。</p></li>
+<li><p>Now that we see QAC is being used here, we can then further read up <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/69db77e2e54a0fba95d83c9411c6b11cd25beae9/ding/model/template/qac.py#L40">ding/model/template/qac:QAC</a>. The <code class="docutils literal notranslate"><span class="pre">qac</span> <span class="pre">model</span></code> implemented in DI-engine currently only supports <code class="docutils literal notranslate"><span class="pre">obs_shape</span></code>of 1. However, the observation space of the task chosen is an image of <code class="docutils literal notranslate"><span class="pre">obs_shape</span> <span class="pre">=</span> <span class="pre">(3,</span> <span class="pre">height,</span> <span class="pre">width)</span></code></p></li>
 </ul>
+<p>Hence, we will need to do some customization.</p>
 </section>
-<section id="custom-model">
-<h3>3. custom_model 实现<a class="headerlink" href="#custom-model" title="Permalink to this headline">¶</a></h3>
-<p>根据已有的 defaul_model 来决定 custom_model 所需实现的功能:</p>
+<section id="customizing-the-model">
+<h3>3. Customizing the model<a class="headerlink" href="#customizing-the-model" title="Permalink to this headline">¶</a></h3>
+<p>Using the default_model as a guide and reference when crafting the custom_model:</p>
 <ul class="simple">
-<li><p>需要实现原 default model 中所有的 public 方法</p></li>
-<li><p>保证返回值的类型的原 default model 一致</p></li>
+<li><p>All public methods in the default_model must be implemented in custom_model.</p></li>
+<li><p>Ensure that the type of return in custom_model is the same as the default_model.</p></li>
 </ul>
-<p>具体实现可利用 <a class="reference external" href="https://github.com/opendilab/DI-engine/tree/main/ding/model/common">ding/model/common</a>下 <code class="docutils literal notranslate"><span class="pre">encoder.py</span></code>/ <code class="docutils literal notranslate"><span class="pre">head.py</span></code>已实现的 <code class="docutils literal notranslate"><span class="pre">encoder</span></code>和 <code class="docutils literal notranslate"><span class="pre">head</span></code></p>
+<p>One can also reference the <code class="docutils literal notranslate"><span class="pre">encoder</span></code> implementation of <code class="docutils literal notranslate"><span class="pre">encoder.py</span></code> and <code class="docutils literal notranslate"><span class="pre">head</span></code> implementation of <code class="docutils literal notranslate"><span class="pre">head.py</span></code>. See <a class="reference external" href="https://github.com/opendilab/DI-engine/tree/main/ding/model/common">ding/model/common</a></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">encoder</span></code>用于对输入的 <code class="docutils literal notranslate"><span class="pre">obs</span></code>或者 <code class="docutils literal notranslate"><span class="pre">action</span></code>等进行编码，便于进行后续处理， DI-engine 中已实现的 encoder 如下：</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">encoder</span></code> is used to encode inputs such as <code class="docutils literal notranslate"><span class="pre">obs</span></code>, <code class="docutils literal notranslate"><span class="pre">action</span></code> etc. for subsequent processing. DI-engine have thus far implemented the following encoders:</p></li>
 </ul>
 <table class="docutils align-default">
 <colgroup>
@@ -383,10 +378,10 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>ConvEncoder</p></td>
-<td><p>处理图像obs输入</p></td>
+<td><p>For encoding image inputs</p></td>
 </tr>
 <tr class="row-odd"><td><p>FCEncoder</p></td>
-<td><p>处理一维obs输入</p></td>
+<td><p>For encoding one dimensional inputs</p></td>
 </tr>
 <tr class="row-even"><td><p>StructEncoder</p></td>
 <td></td>
@@ -394,7 +389,7 @@
 </tbody>
 </table>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">head</span></code>用于对已经编码的数据进行相应处理，输出 policy 所需信息或者辅助 RL 过程， DI-engine 中已实现的 head ：</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">head</span></code> is used to process the encoded inputs and outputs data required by the policy or the overall RL process. DI-engine have thus far implemented the following heads:</p></li>
 </ul>
 <table class="docutils align-default">
 <colgroup>
@@ -408,38 +403,38 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>DiscreteHead</p></td>
-<td><p>输出离散动作值</p></td>
+<td><p>Output discrete action value</p></td>
 </tr>
 <tr class="row-odd"><td><p>DistributionHead</p></td>
-<td><p>输出 Q 值分布</p></td>
+<td><p>Output Q value distribution</p></td>
 </tr>
 <tr class="row-even"><td><p>RainbowHead</p></td>
-<td><p>输出 Q 值分布</p></td>
+<td><p>Output Q value distribution</p></td>
 </tr>
 <tr class="row-odd"><td><p>QRDQNHead</p></td>
-<td><p>Quantile Regression DQN，
-用于输出动作分位数</p></td>
+<td><p>Quantile regression
+continuous action value</p></td>
 </tr>
 <tr class="row-even"><td><p>QuantileHead</p></td>
-<td><p>用于输出动作分位数</p></td>
+<td><p>Output action quantiles</p></td>
 </tr>
 <tr class="row-odd"><td><p>DuelingHead</p></td>
-<td><p>用于输出离散动作的 logit</p></td>
+<td><p>Output discrete action value logits</p></td>
 </tr>
 <tr class="row-even"><td><p>RegressionHead</p></td>
-<td><p>用于输出动作 Q 值</p></td>
+<td><p>Output continuous action Q values</p></td>
 </tr>
 <tr class="row-odd"><td><p>ReparameterizationHead</p></td>
-<td><p>用于输出动作 mu 和 sigma</p></td>
+<td><p>Output action mu and sigma</p></td>
 </tr>
 <tr class="row-even"><td><p>MultiHead</p></td>
-<td><p>处理动作空间为多维的情况</p></td>
+<td><p>Multi-dimensional action spaces</p></td>
 </tr>
 </tbody>
 </table>
-<p>例如这里需要自定义针对 sac+dmc2gym+cartpole-swingup 任务的 model ，我们把新的 custom_model 实现为 <code class="docutils literal notranslate"><span class="pre">QACPixel</span></code> 类</p>
+<p>From here, one will customize the model required specifically for the sac+dmc2gym+cartpole-swingup task combination. For now, we will name and instantiate the new custom_model as a <code class="docutils literal notranslate"><span class="pre">QACPixel</span></code> type.</p>
 <ul class="simple">
-<li><p>这里对照 <code class="docutils literal notranslate"><span class="pre">QAC</span></code>已经实现的方法， <code class="docutils literal notranslate"><span class="pre">QACPixel</span></code>需要实现 <code class="docutils literal notranslate"><span class="pre">init</span></code> ， <code class="docutils literal notranslate"><span class="pre">forward</span></code>，以及 <code class="docutils literal notranslate"><span class="pre">compute_actor</span></code>和  <code class="docutils literal notranslate"><span class="pre">compute_critic</span></code>。</p></li>
+<li><p>With reference to the <code class="docutils literal notranslate"><span class="pre">QAC</span></code> implementation, the <code class="docutils literal notranslate"><span class="pre">QACPixel</span></code> implementation must have the following methods:  <code class="docutils literal notranslate"><span class="pre">init</span></code>, <code class="docutils literal notranslate"><span class="pre">forward</span></code>, <code class="docutils literal notranslate"><span class="pre">compute_actor</span></code> and <code class="docutils literal notranslate"><span class="pre">compute_critic</span></code>.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@MODEL_REGISTRY</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;qac&#39;</span><span class="p">)</span>
   <span class="k">class</span> <span class="nc">QAC</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -455,8 +450,7 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>针对图像输入， <code class="docutils literal notranslate"><span class="pre">QACPixel</span></code>主要需要修改的是 <code class="docutils literal notranslate"><span class="pre">init</span></code>中对 <code class="docutils literal notranslate"><span class="pre">self.actor</span></code>和 <code class="docutils literal notranslate"><span class="pre">self.critic</span></code>的定义。
-可以看到 <code class="docutils literal notranslate"><span class="pre">QAC</span></code>中 <code class="docutils literal notranslate"><span class="pre">self.actor</span></code>和 <code class="docutils literal notranslate"><span class="pre">self.critic</span></code>的 encoder 都只是一层 nn.Linear</p></li>
+<li><p>In the case of image inputs, the <code class="docutils literal notranslate"><span class="pre">init</span></code>method of <code class="docutils literal notranslate"><span class="pre">QACPixel</span></code> will have to adjust the definition its <code class="docutils literal notranslate"><span class="pre">self.actor</span></code> and <code class="docutils literal notranslate"><span class="pre">self.critic</span></code>. By observation, we can see that the <code class="docutils literal notranslate"><span class="pre">self.action</span></code> and <code class="docutils literal notranslate"><span class="pre">self.critic</span></code> of <code class="docutils literal notranslate"><span class="pre">QAC</span></code> uses an encoder that consists of only a single layer nn.Linear.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@MODEL_REGISTRY</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;qac&#39;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">QAC</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -479,8 +473,7 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>我们通过定义 encoder_cls 指定 encoder 的类型，加入 <code class="docutils literal notranslate"><span class="pre">ConvEncoder</span></code>，并且因为需要对 obs 进行encode 后和 action 进行拼接，
-将 <code class="docutils literal notranslate"><span class="pre">self.critic</span></code>分为  <code class="docutils literal notranslate"><span class="pre">self.critic_encoder</span></code>和 <code class="docutils literal notranslate"><span class="pre">self.critic_head</span></code>两部分</p></li>
+<li><p>We define the type of encoder by defining the variable encoder_cls. In this case, we have defined it as a <code class="docutils literal notranslate"><span class="pre">ConvEncoder</span></code>. Since we need to connect the encoded obs with the action, <code class="docutils literal notranslate"><span class="pre">self.critic</span></code> is constructed from 2 parts: one part being <code class="docutils literal notranslate"><span class="pre">self.critic_encoder</span></code> and the other part <code class="docutils literal notranslate"><span class="pre">self.critic_head</span></code>.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@MODEL_REGISTRY</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;qac_pixel&#39;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">QACPixel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -504,13 +497,13 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>再对 <code class="docutils literal notranslate"><span class="pre">compute_actor</span></code>和  <code class="docutils literal notranslate"><span class="pre">compute_critic</span></code>分别进行修改即可。</p></li>
+<li><p>Finally, we will also have to make corresponding changes to <code class="docutils literal notranslate"><span class="pre">compute_actor</span></code> and  <code class="docutils literal notranslate"><span class="pre">compute_critic</span></code></p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>4. 如何应用自定义模型<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<section id="how-to-make-use-of-a-customized-model">
+<h3>4. How to make use of a customized model<a class="headerlink" href="#how-to-make-use-of-a-customized-model" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>新 pipeline ： 直接定义model，作为参数传入 policy 进行初始化，如：</p></li>
+<li><p>New pipeline: Define the model with the corresponding imports, then pass the model into the policy as an argument as follows.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
 <span class="kn">from</span> <span class="nn">ding.model.template.qac</span> <span class="kn">import</span> <span class="n">QACPixel</span>
@@ -521,10 +514,8 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>旧pipeline</p></li>
+<li><p>Old pipeline: Pass the defined model into <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/entry/serial_entry.py#L22">serial_pipeline</a> as a argument. The model will then be passed on to <code class="docutils literal notranslate"><span class="pre">create_policy</span></code>.</p></li>
 </ul>
-<p>将定义好的 model 作为参数传入 <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/entry/serial_entry.py#L22">serial_pipeline</a>,
-传入的 model 将在 <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/entry/serial_entry.py#L59">serial_pipeline</a>通过 <code class="docutils literal notranslate"><span class="pre">create_policy</span></code> 被调用。或者跟上述新 pipeline 一样，作为参数传入 policy 。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
 <span class="k">def</span> <span class="nf">serial_pipeline</span><span class="p">(</span>
   <span class="n">input_cfg</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]],</span>
@@ -540,13 +531,12 @@
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h3>5. 测试自定义 model<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<section id="unit-testing-a-customized-model">
+<h3>5. Unit testing a customized model<a class="headerlink" href="#unit-testing-a-customized-model" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>编写新的 model 测试，一般而言，首先需要构造 <code class="docutils literal notranslate"><span class="pre">obs</span></code> <code class="docutils literal notranslate"><span class="pre">action</span></code>等输入，传入 model ，验证输出的维度、类型的正确性。其次如果涉及神经网络，需要验证 model 是否可微。
-如对于我们编写的新模型 <code class="docutils literal notranslate"><span class="pre">QACPixel</span></code>编写测试，首先构造维度为 <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">channel,</span> <span class="pre">height,</span> <span class="pre">width)</span></code>（B = batch_size）的 <code class="docutils literal notranslate"><span class="pre">obs</span></code>和维度为 <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">action_shape)</span></code>的 <code class="docutils literal notranslate"><span class="pre">obs</span></code>，传入 <code class="docutils literal notranslate"><span class="pre">QACPixel</span></code>的 <code class="docutils literal notranslate"><span class="pre">actor</span></code>和 <code class="docutils literal notranslate"><span class="pre">critic</span></code>得到输出.
-检查输出的 <code class="docutils literal notranslate"><span class="pre">q,</span> <span class="pre">mu,</span> <span class="pre">sigma</span></code>的维度是否正确，以及相应的 <code class="docutils literal notranslate"><span class="pre">actor</span></code>和 <code class="docutils literal notranslate"><span class="pre">critic</span></code> model 是否可微：</p></li>
+<li><p>In general, when writing unit tests, one would need to first manually construct the <code class="docutils literal notranslate"><span class="pre">obs</span></code> and <code class="docutils literal notranslate"><span class="pre">action</span></code> inputs, define the model and verify that output dimensions and type are correct. Following that, if the model contains a neural network, it is also necessary to verify that the model is differentiable.</p></li>
 </ul>
+<p>Take for example the unit test written for our new model <code class="docutils literal notranslate"><span class="pre">QACPixel</span></code>. We first construct <code class="docutils literal notranslate"><span class="pre">obs</span></code>with a shape of  <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">channel,</span> <span class="pre">height,</span> <span class="pre">width)</span></code> (where B = batch_size) and we construct <code class="docutils literal notranslate"><span class="pre">action</span></code> with a shape of <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">action_shape)</span></code>. Then we define the model <code class="docutils literal notranslate"><span class="pre">QACPixel</span></code> and obtain and pass along the corresponding outputs of its <code class="docutils literal notranslate"><span class="pre">actor</span></code> and <code class="docutils literal notranslate"><span class="pre">critic</span></code>. Finally, we make sure that the shape sizes of <code class="docutils literal notranslate"><span class="pre">q,</span> <span class="pre">mu,</span> <span class="pre">sigma</span></code> are correct and that <code class="docutils literal notranslate"><span class="pre">actor</span></code> and <code class="docutils literal notranslate"><span class="pre">critic</span></code> is differentiable.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestQACPiexl</span><span class="p">:</span>
 
   <span class="k">def</span> <span class="nf">test_qacpixel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action_shape</span><span class="p">,</span> <span class="n">twin</span><span class="p">):</span>
@@ -572,11 +562,11 @@
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>同样，使用者也可以参考 DI-engine 中已有的单元测试，来熟悉相关神经网络模型的使用</p>
+<blockquote>
+<div><p>Alternatively, users can also reference existing unit tests implemented in DI-engine to get familiar with the various neural networks while customizing a model.</p>
+</div></blockquote>
+<p>For more on writing and running unit tests, refer to <a class="reference external" href="https://di-engine-docs.readthedocs.io/zh_CN/latest/22_test/index_zh.html">Unit Testing Guidelines</a></p>
 </div>
-<ul class="simple">
-<li><p>单元测试编写运行可参考 <a class="reference external" href="https://di-engine-docs.readthedocs.io/zh_CN/latest/22_test/index_zh.html">单元测试指南</a></p></li>
-</ul>
 </section>
 </section>
 </section>
@@ -589,12 +579,12 @@
   
   <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
     
-    <a href="env_wrapper_zh.html" class="btn btn-neutral float-right" title="为什么需要 Env Wrapper" accesskey="n"
+    <a href="../05_api_doc/index.html" class="btn btn-neutral float-right" title="API Doc" accesskey="n"
       rel="next">Next <img src="../_static/images/chevron-right-blue.svg"
         class="next-page"></a>
     
     
-    <a href="ding_env_zh.html" class="btn btn-neutral" title="如何将自己的环境迁移到DI-engine中" accesskey="p"
+    <a href="ding_env.html" class="btn btn-neutral" title="How to migrate your own environment to DI-engine" accesskey="p"
       rel="prev"><img src="../_static/images/chevron-right-blue.svg" class="previous-page"> Previous</a>
     
   </div>
@@ -624,15 +614,15 @@
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">如何自定义神经网络模型（model）</a><ul>
-<li><a class="reference internal" href="#policy">Policy 默认使用的模型是什么</a></li>
-<li><a class="reference internal" href="#id1">如何自定义神经网络模型</a></li>
-<li><a class="reference internal" href="#id2">自定义 model 基本步骤</a><ul>
-<li><a class="reference internal" href="#env-policy">1. 明确 env, policy</a></li>
-<li><a class="reference internal" href="#policy-default-model">2. 查阅 policy 中的 default_model 是否适用</a></li>
-<li><a class="reference internal" href="#custom-model">3. custom_model 实现</a></li>
-<li><a class="reference internal" href="#id3">4. 如何应用自定义模型</a></li>
-<li><a class="reference internal" href="#id4">5. 测试自定义 model</a></li>
+<li><a class="reference internal" href="#">How to customize the neural network model</a><ul>
+<li><a class="reference internal" href="#default-model-used-in-a-policy">Default model used in a policy</a></li>
+<li><a class="reference internal" href="#id1">How to customize the neural network model</a></li>
+<li><a class="reference internal" href="#step-by-step-guide-to-customizing-a-model">Step-by-step guide to customizing a model</a><ul>
+<li><a class="reference internal" href="#choose-your-environment-and-policy">1. Choose your environment and policy</a></li>
+<li><a class="reference internal" href="#check-to-see-if-the-policy-s-default-model-is-suitable">2. Check to see if the policy’s default_model is suitable</a></li>
+<li><a class="reference internal" href="#customizing-the-model">3. Customizing the model</a></li>
+<li><a class="reference internal" href="#how-to-make-use-of-a-customized-model">4. How to make use of a customized model</a></li>
+<li><a class="reference internal" href="#unit-testing-a-customized-model">5. Unit testing a customized model</a></li>
 </ul>
 </li>
 </ul>

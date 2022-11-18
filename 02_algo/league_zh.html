@@ -13,7 +13,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>FAQ &mdash; DI-engine 0.1.0 documentation</title>
+  <title>零和博弈 &mdash; DI-engine 0.1.0 documentation</title>
   
 
   <link rel="shortcut icon" href="../_static/images/favicon.ico" />
@@ -35,8 +35,6 @@
   <link rel="stylesheet" href="../_static/css/style.css" type="text/css" />
   <link rel="index" title="Index" href="../genindex.html" />
   <link rel="search" title="Search" href="../search.html" />
-  <link rel="next" title="强化学习基础概念介绍" href="../10_concepts/index_zh.html" />
-  <link rel="prev" title="cache" href="../05_api_doc/utils/data/structure.html" />
     <link href="../_static/css/style.css" rel="stylesheet" type="text/css">
 
 
@@ -205,14 +203,14 @@
         
         
         <p class="caption" role="heading"><span class="caption-text">用户指南</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../00_intro/index_zh.html">DI-engine 简介</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_quickstart/index_zh.html">快速开始</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_algo/index_zh.html">强化学习算法分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_zh.html">强化学习算法分类</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_system/index_zh.html">系统设计</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_best_practice/index_zh.html">最佳实践</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05_api_doc/index.html">API Doc</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_faq/index_zh.html">FAQ</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">强化学习教程</span></p>
 <ul>
@@ -266,13 +264,13 @@
       </li>
 
         
-      <li>FAQ</li>
+      <li>零和博弈</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
         
             
-            <a href="../_sources/06_faq/index_zh.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
+            <a href="../_sources/02_algo/league_zh.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
           
         
       </li>
@@ -296,112 +294,63 @@
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
               <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
                 
-  <section id="faq">
-<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-</div>
-<section id="q1-warning">
-<h2>Q1: 关于使用时出现的warning<a class="headerlink" href="#q1-warning" title="Permalink to this headline">¶</a></h2>
-<dl class="field-list simple">
-<dt class="field-odd">A1</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<p>对于运行DI-engine时命令行中显示的import linlink, ceph, memcache, redis的相关warning，一般使用者忽略即可，DI-engine会在import时自动进行寻找相应的替代库或代码实现。</p>
+  <section id="id1">
+<h1>零和博弈<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<section id="id2">
+<h2>问题定义与研究动机<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>零和博弈，又称零和游戏，是博弈论的一个经典概念，意为所有博弈方的利益之和为零的博弈。零和博弈根据参与者的人数分类可分为双人零和博弈和多人零和博弈。
+经典的双人零和博弈场景如石头剪刀布，其中一方获胜必然存在另一方失败，意味着当其中的一方收益增加，必然会带来其他方等量的损失。
+在双人零和博弈的研究中，学界普遍认为，其研究难点在于如何找到这一问题的解，也就是Nash均衡解（ Nash Equilibrium Solution）。</p>
 </section>
-<section id="q2-di-engine-cli">
-<h2>Q2: 安装之后无法使用DI-engine命令行工具(CLI)<a class="headerlink" href="#q2-di-engine-cli" title="Permalink to this headline">¶</a></h2>
-<dl class="field-list simple">
-<dt class="field-odd">A2</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
+<section id="id3">
+<h2>研究历程<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>随着学者们对于零和博弈方向的研究深入，主要有以下几个发展阶段:</p>
+<p><strong>1. 自我博弈( Self-Play, SP)</strong></p>
+<p>自我博弈指的是训练中自己和自己对抗，常用于解决棋类游戏和建立一般游戏的基准。像围棋AI AlphaZero 和 Dota2的AI OpenAI Five，则没有利用任何人类数据，只通过自我博弈便达到了超越人类的水平。
+虽然Self-Play可以在很多游戏类型中达到超越人类水平的表现，但也有其不足之处。比如在石头剪刀布这一环境中假定人类的策略是只出剪刀，那么 Self-Play 模型会以一个类似剪刀，石头，布的顺序无限循环往复作为策略。</p>
+<p><strong>2. 虚拟自我博弈( Fictious Self-Play, FSP)</strong>  [<a class="footnote-reference brackets" href="#id12" id="id4">1</a>]</p>
+<p>为了解决上述 Self-Play局限性问题， FSP在训练中引入了训练智能体的过往版本加入训练，在 Self-Play的基础上，还会随机的以相同概率挑选过往版本的智能体对抗，这种训练方式被称为虚拟自我博弈。因为对手池的多样性，不管我们的初始策略是什么， FSP都会收敛到均匀随机出石头剪刀布的混合策略，同时该策略这也是此问题的纳什均衡解。</p>
+<p><strong>3. 优先虚拟自我博弈( Prioritised Fictious Self-Play, PFSP)</strong>  [<a class="footnote-reference brackets" href="#id13" id="id5">2</a>]</p>
+<p>PFSP( Prioritised Fictious Self-Play)是在 FSP的基础上，依照训练智能体和历史智能体之间的对战胜率分配对手，增加训练智能体对战胜率低的历史智能体的出现频率，从而达到更快的收敛速度，这种训练方式被称为优先虚拟自我博弈。星际争霸2的AI AlphaStar [<a class="footnote-reference brackets" href="#id14" id="id6">3</a>] 便采用了 PFSP来辅助训练。</p>
+<img alt="../_images/pfsp.png" class="align-center" src="../_images/pfsp.png" />
+</section>
+<section id="id7">
+<h2>未来展望<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>如何设计更为高效的匹配策略，用更少的训练资源，得到更强的智能体。</p></li>
+</ol>
+<p>在大量工程项目( ALphaStar, TstarBot [<a class="footnote-reference brackets" href="#id15" id="id8">4</a>] ) 中都有各自的设计，但往往是经验性的（依靠人类的主观判断），很少有在理论上论证为何高效。</p>
+<ol class="arabic simple" start="2">
+<li><p>如何考虑多人零和博弈乃至更为一般的多人博弈问题。</p></li>
+</ol>
 <ul class="simple">
-<li><p>部分运行环境使用pip安装时指定 <code class="docutils literal notranslate"><span class="pre">-e</span></code> 选项会导致无法使用CLI，一般非开发者无需指定该选项，去掉该选项重新安装即可</p></li>
-<li><p>部分运行环境会将CLI安装在用户目录下，需要验证CLI的安装目录是否在使用者的环境变量中 （如 linux 的 <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> 中）</p></li>
+<li><p>在 Policy-Space Response Oracles [<a class="footnote-reference brackets" href="#id16" id="id9">5</a>] 这篇文章中提出了多人博弈时的一个求解框架。</p></li>
+<li><p>在 Alpha-Rank [<a class="footnote-reference brackets" href="#id17" id="id10">6</a>] 这篇文章中，考虑了除纳什均衡之外的另一种解。</p></li>
 </ul>
+<img alt="../_images/psro.png" class="align-center" src="../_images/psro.png" />
 </section>
-<section id="q3">
-<h2>Q3: 安装时出现”没有权限”相关错误<a class="headerlink" href="#q3" title="Permalink to this headline">¶</a></h2>
-<dl class="field-list simple">
-<dt class="field-odd">A3</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<dl class="simple">
-<dt>由于某些运行环境中缺少相应权限，pip安装时可能出现”没有权限”(Permission denied)，具体原因及解决方法如下：</dt><dd><ul class="simple">
-<li><p>pip添加 <code class="docutils literal notranslate"><span class="pre">--user</span></code> 选项，安装在用户目录下</p></li>
-<li><p>将仓库根目录下的 <code class="docutils literal notranslate"><span class="pre">.git</span></code> 文件夹移动出去，执行pip安装命令，再将其移动回来，具体原因可参见  <a class="reference external" href="https://github.com/pypa/pip/issues/4525">https://github.com/pypa/pip/issues/4525</a></p></li>
-</ul>
+<section id="id11">
+<h2>参考文献<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id4">1</a></span></dt>
+<dd><p>Heinrich, Johannes, Marc Lanctot, and David Silver. “Fictitious self-play in extensive-form games.” International conference on machine learning. PMLR, 2015.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">2</a></span></dt>
+<dd><p>Lanctot, Marc, et al. “A unified game-theoretic approach to multiagent reinforcement learning.” Advances in neural information processing systems 30 (2017).</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id6">3</a></span></dt>
+<dd><p>Vinyals, Oriol, et al. “Grandmaster level in StarCraft II using multi-agent reinforcement learning.” Nature 575.7782 (2019): 350-354.</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id8">4</a></span></dt>
+<dd><p>Han, Lei, et al. “Tstarbot-x: An open-sourced and comprehensive study for efficient league training in starcraft ii full game.” arXiv preprint arXiv:2011.13729 (2020).</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id9">5</a></span></dt>
+<dd><p>Muller, Paul, et al. “A generalized training approach for multiagent learning.” arXiv preprint arXiv:1909.12823 (2019).</p>
+</dd>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id10">6</a></span></dt>
+<dd><p>Omidshafiei, Shayegan, et al. “α-rank: Multi-agent evaluation by evolution.” Scientific reports 9.1 (2019): 1-29.</p>
 </dd>
 </dl>
-</section>
-<section id="q4-syncsubprocessenvmanager">
-<h2>Q4: 如何设置SyncSubprocessEnvManager的相关运行参数<a class="headerlink" href="#q4-syncsubprocessenvmanager" title="Permalink to this headline">¶</a></h2>
-<dl class="field-list simple">
-<dt class="field-odd">A4</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<p>在配置文件的env字段添加manager字段，可以指定是否使用shared_memory，多进程multiprocessing启动的上下文，下面的代码提供了一个简单样例，详细的参数信息可参考 <code class="docutils literal notranslate"><span class="pre">SyncSubprocessEnvManager</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-    <span class="n">env</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-        <span class="n">manager</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">shared_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="q5">
-<h2>Q5: 如何调整学习率<a class="headerlink" href="#q5" title="Permalink to this headline">¶</a></h2>
-<dl class="field-list simple">
-<dt class="field-odd">A5</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<p>在相应算法的入口添加 <code class="docutils literal notranslate"><span class="pre">lr_scheduler</span></code> 代码，可以通过调用 <code class="docutils literal notranslate"><span class="pre">torch.optim.lr_scheduler</span></code> （参考： <a class="reference external" href="https://pytorch.org/docs/stable/optim.html">https://pytorch.org/docs/stable/optim.html</a>）模块来调整学习率，并且在模型优化更新之后使用 <code class="docutils literal notranslate"><span class="pre">scheduler.step()</span></code> 对学习率进行更新。
-下面代码提供一个简单的案例，具体可参考demo: <a class="reference external" href="https://github.com/opendilab/DI-engine/commit/9cad6575e5c00036aba6419f95cdce0e7342630f">https://github.com/opendilab/DI-engine/commit/9cad6575e5c00036aba6419f95cdce0e7342630f</a>。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.optim.lr_scheduler</span> <span class="kn">import</span> <span class="n">LambdaLR</span>
-
-<span class="o">...</span>
-
-<span class="c1"># Set up RL Policy</span>
-<span class="n">policy</span> <span class="o">=</span> <span class="n">DDPGPolicy</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">policy</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-<span class="c1"># Set up lr_scheduler, the optimizer attribute will be different in different policy.</span>
-<span class="c1"># For example, in DDPGPolicy the attribute is &#39;optimizer_actor&#39;, but in DQNPolicy the attribute is &#39;optimizer&#39;.</span>
-<span class="n">lr_scheduler</span> <span class="o">=</span> <span class="n">LambdaLR</span><span class="p">(</span>
-    <span class="n">policy</span><span class="o">.</span><span class="n">learn_mode</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">&#39;optimizer_actor&#39;</span><span class="p">),</span> <span class="n">lr_lambda</span><span class="o">=</span><span class="k">lambda</span> <span class="n">iters</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">iters</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="o">...</span>
-
-<span class="c1"># Train</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">policy</span><span class="o">.</span><span class="n">learn</span><span class="o">.</span><span class="n">update_per_collect</span><span class="p">):</span>
-        <span class="o">...</span>
-        <span class="n">learner</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">collector</span><span class="o">.</span><span class="n">envstep</span><span class="p">)</span>
-        <span class="n">lr_scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>学习率变化曲线如图所示</p>
-<a class="reference internal image-reference" href="../_images/Q5_lr_scheduler.png"><img alt="../_images/Q5_lr_scheduler.png" class="align-center" src="../_images/Q5_lr_scheduler.png" style="height: 250px;" /></a>
-</section>
-<section id="q6-evaluator">
-<h2>Q6: 如何理解打印出的 [EVALUATOR] 信息<a class="headerlink" href="#q6-evaluator" title="Permalink to this headline">¶</a></h2>
-<dl class="field-list simple">
-<dt class="field-odd">A6</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<p>我们在 <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/worker/collector/interaction_serial_evaluator.py#L253">interaction_serial_evaluator.py</a> ，打印出 <code class="docutils literal notranslate"><span class="pre">evaluator</span></code> 的评估信息，
-包括 <code class="docutils literal notranslate"><span class="pre">env</span></code>, <code class="docutils literal notranslate"><span class="pre">final</span> <span class="pre">reward</span></code>, <code class="docutils literal notranslate"><span class="pre">current</span> <span class="pre">episode</span></code> 分别代表当前已完成局 (<code class="docutils literal notranslate"><span class="pre">timestep.done=True</span></code>) 对应的环境索引 (<code class="docutils literal notranslate"><span class="pre">env_id</span></code>), 当前已完成局游戏的奖励， 以及它是 <code class="docutils literal notranslate"><span class="pre">evaluator</span></code> 评估的第几局游戏。
-一个典型的 evaluator log 信息如下图所示：</p>
-<a class="reference internal image-reference" href="../_images/Q6_evaluator_info.png"><img alt="../_images/Q6_evaluator_info.png" class="align-center" src="../_images/Q6_evaluator_info.png" style="height: 250px;" /></a>
-<p>在某些情况下，<code class="docutils literal notranslate"><span class="pre">evaluator</span></code> 中的不同环境可能会收集不同长度的游戏局。 例如，假设我们通过 <code class="docutils literal notranslate"><span class="pre">evaluator</span></code> 收集 16 局游戏，但只有 5 个评估环境 (<code class="docutils literal notranslate"><span class="pre">eval_env</span></code>)，即在 config 中设置 <code class="docutils literal notranslate"><span class="pre">n_evaluator_episode=16,</span> <span class="pre">evaluator_env_num=5</span></code>，
-我们如果不对每个评估环境的评估总局数进行限制，很可能会得到许多步长较短的游戏局，这样一来，这次评估阶段得到的平均奖励就会有偏差，不能完全反映当前 policy 的性能 (只反映了在步数较短的游戏局上的性能)。</p>
-<p>我们通过使用 <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/worker/collector/base_serial_evaluator.py#L78">VectorEvalMonitor</a> 类来缓解这个问题。
-在这个类中，我们在 <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/worker/collector/base_serial_evaluator.py#L103">这里</a> 平均指定每个 <code class="docutils literal notranslate"><span class="pre">eval_env</span></code> 需要评估的局数，
-例如，如果设置 <code class="docutils literal notranslate"><span class="pre">n_evaluator_episode=16</span></code> 和 <code class="docutils literal notranslate"><span class="pre">evaluator_env_num=8</span></code>，那么每个 <code class="docutils literal notranslate"><span class="pre">eval_env</span></code> 只有 2 局将被添加到统计量中。
-关于 <code class="docutils literal notranslate"><span class="pre">VectorEvalMonitor</span></code> 每个方法的具体含义，请参考类 <a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/worker/collector/base_serial_evaluator.py#L78">VectorEvalMonitor</a> 的注释。</p>
-<p>值得注意的是，当 evaluator 的某一个 <code class="docutils literal notranslate"><span class="pre">eval_env</span></code> 完成评估数量为 <code class="docutils literal notranslate"><span class="pre">each_env_episode[i]</span></code> 的游戏局后，由于环境的 reset 是由
-<a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/envs/env_manager/subprocess_env_manager.py">env_manager</a>  自动控制的，它还会继续运行下去, 除非整个评估阶段终止。
-我们是用 <code class="docutils literal notranslate"><span class="pre">VectorEvalMonitor</span></code> 控制评估阶段的终止，只有当
-<a class="reference external" href="https://github.com/opendilab/DI-engine/blob/main/ding/worker/collector/interaction_serial_evaluator.py#L224">eval_monitor.is_finished()</a> 为True时，
-即 evaluator 完成了所有的评估任务后 (在所有 <code class="docutils literal notranslate"><span class="pre">eval_env</span></code> 上一共评估了 <code class="docutils literal notranslate"><span class="pre">n_evaluator_episode</span></code> 局)，才会退出本次评估, 所以可能会出现某个 <code class="docutils literal notranslate"><span class="pre">eval_env</span></code> 在完成它自己的评估数量为 <code class="docutils literal notranslate"><span class="pre">each_env_episode[i]</span></code> 的游戏局后，其对应的log信息仍然重复出现的情况,
-用户不必担心这些重复的 logs，它们不会对评估结果产生不好的影响。</p>
 </section>
 </section>
 
@@ -410,18 +359,6 @@
               
             </div>
             <footer>
-  
-  <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-    
-    <a href="../10_concepts/index_zh.html" class="btn btn-neutral float-right" title="强化学习基础概念介绍" accesskey="n"
-      rel="next">Next <img src="../_static/images/chevron-right-blue.svg"
-        class="next-page"></a>
-    
-    
-    <a href="../05_api_doc/utils/data/structure.html" class="btn btn-neutral" title="cache" accesskey="p"
-      rel="prev"><img src="../_static/images/chevron-right-blue.svg" class="previous-page"> Previous</a>
-    
-  </div>
   
 
   <hr>
@@ -448,13 +385,11 @@
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">FAQ</a><ul>
-<li><a class="reference internal" href="#q1-warning">Q1: 关于使用时出现的warning</a></li>
-<li><a class="reference internal" href="#q2-di-engine-cli">Q2: 安装之后无法使用DI-engine命令行工具(CLI)</a></li>
-<li><a class="reference internal" href="#q3">Q3: 安装时出现”没有权限”相关错误</a></li>
-<li><a class="reference internal" href="#q4-syncsubprocessenvmanager">Q4: 如何设置SyncSubprocessEnvManager的相关运行参数</a></li>
-<li><a class="reference internal" href="#q5">Q5: 如何调整学习率</a></li>
-<li><a class="reference internal" href="#q6-evaluator">Q6: 如何理解打印出的 [EVALUATOR] 信息</a></li>
+<li><a class="reference internal" href="#">零和博弈</a><ul>
+<li><a class="reference internal" href="#id2">问题定义与研究动机</a></li>
+<li><a class="reference internal" href="#id3">研究历程</a></li>
+<li><a class="reference internal" href="#id7">未来展望</a></li>
+<li><a class="reference internal" href="#id11">参考文献</a></li>
 </ul>
 </li>
 </ul>
