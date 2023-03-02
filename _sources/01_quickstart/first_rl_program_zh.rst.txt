@@ -1,9 +1,10 @@
-第一个强化学习程序
+揭秘第一个强化学习程序
 ============================
 
 .. toctree::
    :maxdepth: 2
 
+强化学习算法是众多获得决策智能体的机器学习算法之一。
 CartPole 是强化学习入门的理想学习环境，使用 DQN 算法可以在很短的时间内让 CartPole 收敛（保持平衡）。
 我们将基于 CartPole + DQN 介绍一下 DI-engine 的用法。
 
@@ -83,7 +84,7 @@ DI-engine 集成了大部分强化学习策略，使用它们只需要选择相�
         task.use(StepCollector(cfg, policy.collect_mode, collector_env))  # 采集环境数据
         task.use(data_pusher(cfg, buffer_))  # 将数据保存到 buffer
         task.use(OffPolicyLearner(cfg, policy.learn_mode, buffer_))  # 训练模型
-        task.use(CkptSaver(cfg, policy, train_freq=100))  # 保存模型
+        task.use(CkptSaver(policy, cfg.exp_name, train_freq=100))  # 保存模型
         task.run()  # 在评估流程中，如果发现模型表现已经超过了收敛值，这里将提前结束
 
 运行代码

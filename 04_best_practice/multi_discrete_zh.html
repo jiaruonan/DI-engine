@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="../_static/css/style.css" type="text/css" />
   <link rel="index" title="Index" href="../genindex.html" />
   <link rel="search" title="Search" href="../search.html" />
-  <link rel="next" title="随机种子" href="random_seed_zh.html" />
-  <link rel="prev" title="如何自定义模型 Wrapper" href="model_wrapper_zh.html" />
+  <link rel="next" title="如何理解训练过程中生成的文件夹？" href="training_generated_folders_zh.html" />
+  <link rel="prev" title="如何构建多智能体环境" href="marl_zh.html" />
     <link href="../_static/css/style.css" rel="stylesheet" type="text/css">
 
 
@@ -324,7 +324,7 @@
 <h2>举例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>在这里，我们提供了一个多重离散动作空间环境的案例，它是通过将 Atari 游戏的单个动作空间分解为多个动作空间的笛卡尔积而得出的，例如6=2*3。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MultiDiscreteEnv</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Map the actions from the factorized action spaces to the original single action space.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map the actions from the factorized action spaces to the original single action space.</span>
 
 <span class="sd">    :param gym.Env env: the environment to wrap.</span>
 <span class="sd">    :param list action_shape: dims of the the factorized action spaces.</span>
@@ -335,7 +335,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">action_shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">action_shape</span><span class="p">))))</span>
 
     <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Overview:</span>
 <span class="sd">            Step the environment with the given factorized actions.</span>
 <span class="sd">        Arguments:</span>
@@ -394,12 +394,12 @@
   
   <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
     
-    <a href="random_seed_zh.html" class="btn btn-neutral float-right" title="随机种子" accesskey="n"
+    <a href="training_generated_folders_zh.html" class="btn btn-neutral float-right" title="如何理解训练过程中生成的文件夹？" accesskey="n"
       rel="next">Next <img src="../_static/images/chevron-right-blue.svg"
         class="next-page"></a>
     
     
-    <a href="model_wrapper_zh.html" class="btn btn-neutral" title="如何自定义模型 Wrapper" accesskey="p"
+    <a href="marl_zh.html" class="btn btn-neutral" title="如何构建多智能体环境" accesskey="p"
       rel="prev"><img src="../_static/images/chevron-right-blue.svg" class="previous-page"> Previous</a>
     
   </div>

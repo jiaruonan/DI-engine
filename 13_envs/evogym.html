@@ -314,17 +314,17 @@ The image below shows a robot in action.</p>
 <h3>Installation Method<a class="headerlink" href="#installation-method" title="Permalink to this headline">¶</a></h3>
 <p>The Evogym environment can be downloaded from GitHub and installed using pip.
 Given that the installation procedure may vary a little according to your OS, you are invited to check the instructions in the original <a class="reference external" href="https://github.com/EvolutionGym/evogym#installation">repository</a> in case you should encounter any problem.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone --recurse-submodules https://github.com/EvolutionGym/evogym.git
-<span class="nb">cd</span> evogym
-pip install -r requirements.txt
-python setup.py install
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>https://github.com/EvolutionGym/evogym.git
+<span class="nb">cd</span><span class="w"> </span>evogym
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+python<span class="w"> </span>setup.py<span class="w"> </span>install
 </pre></div>
 </div>
 </section>
 <section id="verify-installation">
 <h3>Verify Installation<a class="headerlink" href="#verify-installation" title="Permalink to this headline">¶</a></h3>
 <p>After installation, you can verify whether if it is successful by running the following command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python gym_test.py
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>gym_test.py
 </pre></div>
 </div>
 </section>
@@ -350,16 +350,16 @@ python setup.py install
 <section id="reward-space">
 <h3>Reward Space<a class="headerlink" href="#reward-space" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Each task is equipped with a reward function measuring the performance of the current robot and the control action. Generally, it is a <code class="docutils literal notranslate"><span class="pre">float</span></code> value.</p></li>
+<li><p>Each task is equipped with a reward function measuring the robot’s current performance of the control action. Generally, it is a <code class="docutils literal notranslate"><span class="pre">float</span></code> value.</p></li>
 </ul>
 </section>
 </section>
 <section id="key-facts">
 <h2>Key Facts<a class="headerlink" href="#key-facts" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>1D observation input which can vary according to robot’s structure, task and environment.</p></li>
-<li><p>Continuous action space according to the structure of the robot.</p></li>
-<li><p>Top-performing policies not only can learn how to control a robot, but they can also learn how to create a better robot design tailored for a specific task.</p></li>
+<li><p>Vector observation space (1D vector) varies according to robot’s structure, task and environment.</p></li>
+<li><p>Continuous action space varies according to the structure of the robot.</p></li>
+<li><p>Top-performing policies learned can not only be used to control a robot, but also be beneficial for creating a better robot design for a specific task.</p></li>
 </ol>
 </section>
 <section id="other">
@@ -501,9 +501,9 @@ Inside, for specific configuration files, such as <code class="docutils literal 
 </section>
 <section id="benchmark-algorithm-performance">
 <h2>Benchmark Algorithm Performance<a class="headerlink" href="#benchmark-algorithm-performance" title="Permalink to this headline">¶</a></h2>
+<p>Carrier</p>
 <ul>
-<li><p>Carrier（Reward of 1 is given to the agent for completing its task plus a small reward for getting close to it).</p></li>
-<li><p>The robot catches a box initialized on top of it and carries it as far as possible.</p>
+<li><p>Task description: The robot catches the box initialized above and carries it as far as possible without dropping it, the farther the distance carried the greater the reward.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Carrier + PPO</p></li>
