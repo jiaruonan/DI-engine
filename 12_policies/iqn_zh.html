@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="../_static/css/style.css" type="text/css" />
   <link rel="index" title="Index" href="../genindex.html" />
   <link rel="search" title="Search" href="../search.html" />
-  <link rel="next" title="FQF" href="fqf.html" />
-  <link rel="prev" title="Rainbow" href="rainbow.html" />
+  <link rel="next" title="DDPG" href="ddpg_zh.html" />
+  <link rel="prev" title="Rainbow" href="rainbow_zh.html" />
     <link href="../_static/css/style.css" rel="stylesheet" type="text/css">
 
 
@@ -204,30 +204,30 @@
         
         
         
-        <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+        <p class="caption" role="heading"><span class="caption-text">用户指南</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../00_intro/index.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_quickstart/index.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_algo/index.html">RL Algorithm Taxonomy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_system/index.html">System Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_best_practice/index.html">Best Practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_intro/index_zh.html">DI-engine 简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_quickstart/index_zh.html">快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_algo/index_zh.html">强化学习算法分类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_system/index_zh.html">系统设计</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_best_practice/index_zh.html">最佳实践</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05_api_doc/index.html">API Doc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_faq/index_zh.html">FAQ</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Reinforcement Learning Tutorial</span></p>
+<p class="caption" role="heading"><span class="caption-text">强化学习教程</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../10_concepts/index.html">Introduction to RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11_dizoo/index.html">Learn From DI-zoo</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">RL Algorithms Cheat Sheet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13_envs/index.html">RL Env Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_concepts/index_zh.html">强化学习基础概念介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_dizoo/index_zh.html">从 DI-zoo 开始学习</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index_zh.html">强化学习算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_envs/index_zh.html">强化学习环境示例</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Developer Specification</span></p>
+<p class="caption" role="heading"><span class="caption-text">开发者规范</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../20_spec/index.html">Specification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../21_code_style/index.html">Code Style Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../22_test/index.html">Unit Test Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../23_visual/index.html">Diagrams and Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../24_cooperation/index.html">Github Cooperation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20_spec/index_zh.html">代码规范</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21_code_style/index_zh.html">代码风格指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22_test/index_zh.html">单元测试指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23_visual/index_zh.html">图像与可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24_cooperation/index_zh.html">Github 合作模式</a></li>
 </ul>
 
         
@@ -260,13 +260,13 @@
   <ul class="pytorch-breadcrumbs">
     
       <li>
-        <a href="../index.html">
+        <a href="../index_zh.html">
             Docs
         </a> &gt;
       </li>
 
         
-          <li><a href="index.html">RL Algorithms Cheat Sheet</a> &gt;</li>
+          <li><a href="index_zh.html">强化学习算法</a> &gt;</li>
         
       <li>IQN</li>
     
@@ -274,7 +274,7 @@
       <li class="pytorch-breadcrumbs-aside">
         
             
-            <a href="../_sources/12_policies/iqn.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
+            <a href="../_sources/12_policies/iqn_zh.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
           
         
       </li>
@@ -300,60 +300,60 @@
                 
   <section id="iqn">
 <h1>IQN<a class="headerlink" href="#iqn" title="Permalink to this headline">¶</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>IQN was proposed in <a class="reference external" href="https://arxiv.org/pdf/1806.06923">Implicit Quantile Networks for Distributional Reinforcement Learning</a>.
-The goal of distributional RL is to provide a more comprehensive depiction of the expected reward distribution for different actions by modeling the probability distribution of the value function.
-The key difference between IQN and QRDQN is that IQN introduces the implicit quantile network (IQN), a deterministic parametric function trained to re-parameterize samples from a base distribution, e.g. tau in U([0, 1]), to the respective quantile values of a target distribution, while QRDQN direct learns a fixed set of pre-defined quantiles.</p>
+<section id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>IQN 是在 <a class="reference external" href="https://arxiv.org/pdf/1806.06923">Implicit Quantile Networks for Distributional Reinforcement Learning</a> 被提出的。
+Distributional RL 的研究目标是通过建模值函数的概率分布，更全面地描述不同动作的预期奖励分布。
+IQN (Implicit Quantile Network)和 QRDQN (Quantile Regression DQN) 之间的关键区别在于， IQN 引入了隐式量化网络（Implicit Quantile Network），它是一个确定性参数化函数，通过训练将来自基本分布（例如在U([0, 1])上的 tau ）的样本重新参数化为目标分布的相应分位数值，而 QRDQN 直接学习了一组预定义的固定分位数。</p>
 </section>
-<section id="quick-facts">
-<h2>Quick Facts<a class="headerlink" href="#quick-facts" title="Permalink to this headline">¶</a></h2>
+<section id="id2">
+<h2>要点摘要：<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>IQN is a <strong>model-free</strong> and <strong>value-based</strong> RL algorithm.</p></li>
-<li><p>IQN only support <strong>discrete action spaces</strong>.</p></li>
-<li><p>IQN is an <strong>off-policy</strong> algorithm.</p></li>
-<li><p>Usually, IQN use <strong>eps-greedy</strong> or <strong>multinomial sample</strong> for exploration.</p></li>
-<li><p>IQN can be equipped with RNN.</p></li>
+<li><p>IQN 是一种 <strong>无模型（model-free）</strong> 和 <strong>基于值（value-based）</strong> 的强化学习算法。</p></li>
+<li><p>IQN 仅支持 <strong>离散动作空间</strong> 。</p></li>
+<li><p>IQN 是一种 <strong>异策略（off-policy）</strong> 算法。</p></li>
+<li><p>通常情况下， IQN 使用 <strong>eps-greedy</strong> 或 <strong>多项式采样（multinomial sample）</strong> 进行探索。</p></li>
+<li><p>IQN 可以与循环神经网络 (RNN) 结合使用。</p></li>
 </ol>
 </section>
-<section id="key-equations">
-<h2>Key Equations<a class="headerlink" href="#key-equations" title="Permalink to this headline">¶</a></h2>
-<p>In implicit quantile networks, a sampled quantile tau is first encoded into an embedding vector via:</p>
+<section id="id3">
+<h2>关键方程<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>在隐式量化网络中，首先通过以下方式将采样的分位数tau编码为嵌入向量：</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\phi_{j}(\tau):=\operatorname{ReLU}\left(\sum_{i=0}^{n-1} \cos (\pi i \tau) w_{i j}+b_{j}\right)\]</div>
 </div></blockquote>
-<p>Then the quantile embedding is element-wise multiplied by the embedding of the observation of the environment, and the subsequent fully-connected layers map the resulted product vector to the respective quantile value.</p>
+<p>然后，分位数嵌入（quantile embedding）与环境观测的嵌入（embedding）进行逐元素相乘，并通过后续的全连接层将得到的乘积向量映射到相应的分位数值。</p>
 </section>
-<section id="key-graphs">
-<h2>Key Graphs<a class="headerlink" href="#key-graphs" title="Permalink to this headline">¶</a></h2>
-<p>The comparison among DQN, C51, QRDQN and IQN is shown as follows:</p>
+<section id="id4">
+<h2>关键图<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>以下是DQN、C51、QRDQN和IQN之间的比较：</p>
 <a class="reference internal image-reference" href="../_images/dis_reg_compare.png"><img alt="../_images/dis_reg_compare.png" class="align-center" src="../_images/dis_reg_compare.png" style="width: 800px;" /></a>
 </section>
-<section id="extensions">
-<h2>Extensions<a class="headerlink" href="#extensions" title="Permalink to this headline">¶</a></h2>
+<section id="id5">
+<h2>扩展<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <dl>
-<dt>IQN can be combined with:</dt><dd><ul>
-<li><p>PER (Prioritized Experience Replay)</p>
+<dt>IQN 可以与以下技术相结合使用:</dt><dd><ul>
+<li><p>优先经验回放 (Prioritized Experience Replay)</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Whether PER improves IQN depends on the task and the training strategy.</p>
+<p>是否优先级经验回放 (PER) 能够提升 IQN 的性能取决于任务和训练策略。</p>
 </div>
 </li>
-<li><p>Multi-step TD-loss</p></li>
-<li><p>Double (target) Network</p></li>
-<li><p>RNN</p></li>
+<li><p>多步时序差分 (TD) 损失</p></li>
+<li><p>双目标网络 (Double Target Network)</p></li>
+<li><p>循环神经网络 (RNN)</p></li>
 </ul>
 </dd>
 </dl>
 </section>
-<section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<section id="id6">
+<h2>实现<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Our benchmark result of IQN uses the same hyper-parameters as DQN except the IQN’s exclusive hyper-parameter, <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">quantiles</span></code>, which is empirically set as 32. The number of quantiles are not recommended to set larger than 64, which brings marginal gain and much more forward latency.</p>
+<p>我们的IQN基准结果使用与DQN相同的超参数，除了IQN的独有超参数, <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">quantiles</span></code>， 它经验性地设置为32。不推荐将分位数的数量设置为大于64，因为这会带来较小的收益，并且会增加更多的前向传递延迟。</p>
 </div>
-<p>The default config of IQN is defined as follows:</p>
+<p>IQN算法的默认配置如下所示：</p>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ding.policy.iqn.</span></span><span class="sig-name descname"><span class="pre">IQNPolicy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.nn.modules.module.Module</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_field</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ding/policy/iqn.html#IQNPolicy"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -531,7 +531,7 @@ The key difference between IQN and QRDQN is that IQN introduces the implicit qua
 </dl>
 </dd></dl>
 
-<p>The network interface IQN used is defined as follows:</p>
+<p>IQN算法使用的网络接口定义如下：</p>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ding.model.template.q_learning.</span></span><span class="sig-name descname"><span class="pre">IQN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs_shape</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">ding.utils.type_helper.SequenceType</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_shape</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">ding.utils.type_helper.SequenceType</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder_hidden_size_list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ding.utils.type_helper.SequenceType</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[128,</span> <span class="pre">128,</span> <span class="pre">64]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_hidden_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_layer_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_quantiles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantile_embedding_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.nn.modules.module.Module</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">ReLU()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ding/model/template/q_learning.html#IQN"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -587,10 +587,10 @@ Parameter updates with IQN’s MLPs forward setup.</p>
 
 </dd></dl>
 
-<p>The bellman updates of IQN used is defined in the function <code class="docutils literal notranslate"><span class="pre">iqn_nstep_td_error</span></code> of <code class="docutils literal notranslate"><span class="pre">ding/rl_utils/td.py</span></code>.</p>
+<p>IQN算法中使用的贝尔曼更新（Bellman update）在 <code class="docutils literal notranslate"><span class="pre">iqn_nstep_td_error</span></code> 函数中定义，我们可以在 <a href="#id7"><span class="problematic" id="id8">``</span></a>ding/rl_utils/td.py``文件中找到它。</p>
 </section>
-<section id="benchmark">
-<h2>Benchmark<a class="headerlink" href="#benchmark" title="Permalink to this headline">¶</a></h2>
+<section id="id9">
+<h2>基准<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 15%" />
@@ -638,19 +638,15 @@ skip-v4)</p>
 </tr>
 </tbody>
 </table>
-<dl class="simple">
-<dt>P.S.:</dt><dd><ol class="arabic simple">
-<li><p>The above results are obtained by running the same configuration on five different random seeds (0, 1, 2, 3, 4).</p></li>
-</ol>
-</dd>
-</dl>
+<p>P.S.:
+1. 上述结果是通过在五个不同的随机种子 (0, 1, 2, 3, 4)上运行相同的配置获得的。</p>
 </section>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<section id="id10">
+<h2>参考文献<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 <p>(IQN) Will Dabney, Georg Ostrovski, David Silver, Rémi Munos: “Implicit Quantile Networks for Distributional Reinforcement Learning”, 2018; arXiv:1806.06923. https://arxiv.org/pdf/1806.06923</p>
 </section>
-<section id="other-public-implementations">
-<h2>Other Public Implementations<a class="headerlink" href="#other-public-implementations" title="Permalink to this headline">¶</a></h2>
+<section id="id11">
+<h2>其他开源实现<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><p><a class="reference external" href="https://github.com/thu-ml/tianshou/blob/master/tianshou/policy/modelfree/iqn.py">Tianshou</a></p></li>
@@ -667,12 +663,12 @@ skip-v4)</p>
   
   <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
     
-    <a href="fqf.html" class="btn btn-neutral float-right" title="FQF" accesskey="n"
+    <a href="ddpg_zh.html" class="btn btn-neutral float-right" title="DDPG" accesskey="n"
       rel="next">Next <img src="../_static/images/chevron-right-blue.svg"
         class="next-page"></a>
     
     
-    <a href="rainbow.html" class="btn btn-neutral" title="Rainbow" accesskey="p"
+    <a href="rainbow_zh.html" class="btn btn-neutral" title="Rainbow" accesskey="p"
       rel="prev"><img src="../_static/images/chevron-right-blue.svg" class="previous-page"> Previous</a>
     
   </div>
@@ -703,15 +699,15 @@ skip-v4)</p>
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">IQN</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#quick-facts">Quick Facts</a></li>
-<li><a class="reference internal" href="#key-equations">Key Equations</a></li>
-<li><a class="reference internal" href="#key-graphs">Key Graphs</a></li>
-<li><a class="reference internal" href="#extensions">Extensions</a></li>
-<li><a class="reference internal" href="#implementation">Implementation</a></li>
-<li><a class="reference internal" href="#benchmark">Benchmark</a></li>
-<li><a class="reference internal" href="#references">References</a></li>
-<li><a class="reference internal" href="#other-public-implementations">Other Public Implementations</a></li>
+<li><a class="reference internal" href="#id1">概述</a></li>
+<li><a class="reference internal" href="#id2">要点摘要：</a></li>
+<li><a class="reference internal" href="#id3">关键方程</a></li>
+<li><a class="reference internal" href="#id4">关键图</a></li>
+<li><a class="reference internal" href="#id5">扩展</a></li>
+<li><a class="reference internal" href="#id6">实现</a></li>
+<li><a class="reference internal" href="#id9">基准</a></li>
+<li><a class="reference internal" href="#id10">参考文献</a></li>
+<li><a class="reference internal" href="#id11">其他开源实现</a></li>
 </ul>
 </li>
 </ul>
